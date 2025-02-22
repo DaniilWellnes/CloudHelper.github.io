@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cloud Helper</title>
+    <title>Приобрести Cloud Helper</title>
     <style>
         /* Основные стили */
         body {
@@ -11,133 +11,64 @@
             background: #000000; /* Черный фон */
             color: #ffffff;
             margin: 0;
-            padding: 0;
+            padding: 20px 10px; /* Уменьшаем отступы для мобильных устройств */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
         }
 
-        /* Секция с картинкой и текстом */
-        .hero-section {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
+        h1 {
+            font-size: 28px; /* Уменьшаем размер шрифта */
+            font-weight: 700;
+            margin-bottom: 20px; /* Уменьшаем отступы */
             text-align: center;
-            overflow: hidden;
+            color: #ffffff;
+            text-shadow: 0 4px 6px rgba(0, 191, 255, 0.3);
         }
 
-        .hero-section img {
-            position: absolute;
-            top: 0;
-            left: 0;
+        /* Сетка блоков */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Адаптивная сетка */
+            gap: 15px; /* Уменьшаем отступы */
+            max-width: 900px;
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1;
+            padding: 10px; /* Уменьшаем отступы */
+            margin-bottom: 80px; /* Отступ для фиксированных кнопок */
         }
 
-        .hero-text {
-            position: relative;
-            z-index: 2;
-            background: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный фон */
-            backdrop-filter: blur(10px); /* Размытие фона */
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 800px;
-            margin: 0 20px 100px;
-            color: #ffffff; /* Белый текст */
-        }
-
-        .hero-text h1 {
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
-
-        .hero-text p {
-            font-size: 18px;
-            line-height: 1.6;
-        }
-
-        /* Блоки с преимуществами */
-        .features {
-            display: flex;
-            flex-wrap: wrap; /* Добавляем перенос блоков на новую строку */
-            justify-content: center;
-            gap: 20px;
-            padding: 50px 20px;
-            background: #000000;
-        }
-
-        .feature-block {
+        .grid-block {
             background: #1a1a1a;
             border: 2px solid #00bfff;
             border-radius: 10px;
-            padding: 20px;
-            max-width: 300px;
+            padding: 15px; /* Уменьшаем отступы */
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            flex: 1 1 300px; /* Гибкая ширина блоков */
         }
 
-        .feature-block:hover {
-            transform: translateY(-10px);
+        .grid-block:hover {
+            transform: translateY(-5px);
             box-shadow: 0 8px 16px rgba(0, 191, 255, 0.5);
         }
 
-        .feature-block h2 {
-            font-size: 24px;
-            margin-bottom: 15px;
+        .grid-block h2 {
+            font-size: 20px; /* Уменьшаем размер шрифта */
+            margin-bottom: 10px;
             color: #00bfff;
         }
 
-        .feature-block p {
-            font-size: 16px;
-            line-height: 1.6;
+        .grid-block p {
+            font-size: 14px; /* Уменьшаем размер шрифта */
+            margin-bottom: 15px; /* Уменьшаем отступы */
+            color: #e0e0e0;
         }
 
-        /* Секция с картинкой и текстом */
-        .design-section {
-            display: flex;
-            flex-wrap: wrap; /* Добавляем перенос блоков на новую строку */
-            align-items: center;
-            justify-content: center;
-            gap: 40px;
-            padding: 50px 20px;
-            background: #000000;
-        }
-
-        .design-section img {
-            max-width: 100%; /* Картинка адаптируется под ширину экрана */
-            border-radius: 10px;
-            border: 2px solid #00bfff;
-        }
-
-        .design-text {
-            max-width: 500px;
-            padding: 0 20px; /* Добавляем отступы для мобильных устройств */
-        }
-
-        .design-text p {
-            font-size: 18px;
-            line-height: 1.6;
-        }
-
-        /* Кнопки в конце страницы */
-        .button-container {
-            display: flex;
-            flex-wrap: wrap; /* Добавляем перенос кнопок на новую строку */
-            justify-content: center;
-            gap: 20px;
-            padding: 40px 20px;
-            background: #000000;
-            border-top: 2px solid #00bfff;
-        }
-
-        .button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px 24px;
-            font-size: 16px;
+        .grid-block .button {
+            display: inline-block;
+            padding: 8px 16px; /* Уменьшаем отступы */
+            font-size: 14px; /* Уменьшаем размер шрифта */
             font-weight: 600;
             color: #ffffff;
             background: rgba(0, 191, 255, 0.1);
@@ -145,57 +76,91 @@
             border-radius: 8px;
             text-decoration: none;
             transition: background 0.3s ease, transform 0.3s ease;
-            flex: 1 1 200px; /* Гибкая ширина кнопок */
         }
 
-        .button:hover {
+        .grid-block .button:hover {
             background: rgba(0, 191, 255, 0.2);
             transform: translateY(-3px);
         }
 
-        .button:active {
+        .grid-block .button:active {
+            transform: translateY(0);
+        }
+
+        .grid-block .button.disabled {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #666;
+            cursor: not-allowed;
+        }
+
+        .grid-block .button.disabled:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: none;
+        }
+
+        /* Кнопки внизу страницы (фиксированные) */
+        .button-container {
+            position: fixed; /* Фиксированная позиция */
+            bottom: 0; /* Прижимаем к нижней части экрана */
+            left: 0;
+            right: 0;
+            display: flex;
+            flex-wrap: wrap; /* Перенос кнопок на новую строку */
+            justify-content: center;
+            gap: 10px; /* Уменьшаем отступы */
+            padding: 10px; /* Уменьшаем отступы */
+            background: #000000;
+            border-top: 2px solid #00bfff;
+            z-index: 1000; /* Чтобы кнопки были поверх других элементов */
+        }
+
+        .button-container .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px; /* Уменьшаем отступы */
+            font-size: 14px; /* Уменьшаем размер шрифта */
+            font-weight: 600;
+            color: #ffffff;
+            background: rgba(0, 191, 255, 0.1);
+            border: 2px solid #00bfff;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background 0.3s ease, transform 0.3s ease;
+            flex: 1 1 150px; /* Гибкая ширина кнопок */
+        }
+
+        .button-container .button:hover {
+            background: rgba(0, 191, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .button-container .button:active {
             transform: translateY(0);
         }
 
         /* Медиа-запросы для мобильных устройств */
-        @media (max-width: 768px) {
-            .hero-text {
-                margin: 0 10px 50px; /* Уменьшаем отступы */
-                padding: 15px;
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 24px; /* Уменьшаем размер шрифта */
             }
 
-            .hero-text h1 {
-                font-size: 28px; /* Уменьшаем размер заголовка */
+            .grid-block h2 {
+                font-size: 18px; /* Уменьшаем размер шрифта */
             }
 
-            .hero-text p {
-                font-size: 16px; /* Уменьшаем размер текста */
+            .grid-block p {
+                font-size: 12px; /* Уменьшаем размер шрифта */
             }
 
-            .features {
-                padding: 30px 10px; /* Уменьшаем отступы */
+            .grid-block .button {
+                font-size: 12px; /* Уменьшаем размер шрифта */
+                padding: 6px 12px; /* Уменьшаем отступы */
             }
 
-            .feature-block {
-                flex: 1 1 100%; /* Блоки занимают всю ширину */
-                max-width: 100%;
-            }
-
-            .design-section {
-                padding: 30px 10px; /* Уменьшаем отступы */
-            }
-
-            .design-text {
-                max-width: 100%; /* Текст занимает всю ширину */
-            }
-
-            .button-container {
-                padding: 20px 10px; /* Уменьшаем отступы */
-            }
-
-            .button {
-                flex: 1 1 100%; /* Кнопки занимают всю ширину */
-                margin: 5px 0; /* Добавляем отступы между кнопками */
+            .button-container .button {
+                font-size: 12px; /* Уменьшаем размер шрифта */
+                padding: 8px 16px; /* Уменьшаем отступы */
             }
         }
     </style>
@@ -203,45 +168,54 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <!-- Секция с картинкой и текстом -->
-    <section class="hero-section">
-        <img src="img/back_main.jpg" alt="Cloud Helper">
-        <div class="hero-text">
-            <h1>Cloud Helper</h1>
-            <p>
-                Cloud Helper - это ваш персональный помощник в игровом мире Majestic RP (GTA 5 RolePlay), который готов каждый день вам помогать с выполнением полного списка работ, от сбора грибов до работы в шахте и карьере. Проект разрабатывается и будет доводиться до идеала, и само собой усовершенствоваться. Будем рады, если и ты присоединишься к нашей большой семье.
-            </p>
-        </div>
-    </section>
+    <h1>Приобрести Cloud Helper</h1>
 
-    <!-- Блоки с преимуществами -->
-    <section class="features">
-        <div class="feature-block">
-            <h2>Безопасно</h2>
-            <p>Наша программа не внедряется в игру, поэтому шанс бана отсутствует.</p>
+    <!-- Сетка блоков -->
+    <div class="grid-container">
+        <!-- Первая строка: 3 блока -->
+        <div class="grid-block">
+            <h2>Funpay</h2>
+            <p>На 7 дней</p>
+            <a href="#" class="button">Купить</a> <!-- Замените # на свою ссылку -->
         </div>
-        <div class="feature-block">
-            <h2>Эффективно</h2>
-            <p>Ассистент готов помогать Вам практически в любой работе, где требуется неоднократное нажатие клавиш.</p>
-        </div>
-        <div class="feature-block">
-            <h2>Удобно</h2>
-            <p>Простой и интуитивно понятный интерфейс делает использование программы максимально комфортным.</p>
-        </div>
-    </section>
 
-    <!-- Секция с картинкой и текстом -->
-    <section class="design-section">
-        <img src="img/menu.jpg" alt="Дизайн Cloud Helper">
-        <div class="design-text">
-            <p>
-                Начальный дизайн Cloud Helper, который в дальнейшем будет усовершенствоваться и переделываться в зависимости от предпочтений пользователей.
-            </p>
+        <div class="grid-block">
+            <h2>Funpay</h2>
+            <p>На 14 дней</p>
+            <a href="#" class="button">Купить</a> <!-- Замените # на свою ссылку -->
         </div>
-    </section>
 
-    <!-- Кнопки в конце страницы -->
+        <div class="grid-block">
+            <h2>Funpay</h2>
+            <p>На 30 дней</p>
+            <a href="#" class="button">Купить</a> <!-- Замените # на свою ссылку -->
+        </div>
+
+        <!-- Вторая строка: 2 блока по центру -->
+        <div class="grid-block">
+            <h2>Funpay</h2>
+            <p>Навсегда</p>
+            <a href="#" class="button disabled">Разрабатываем</a>
+        </div>
+
+        <div class="grid-block">
+            <h2>Donate</h2>
+            <p>Поддержать проект</p>
+            <a href="#" class="button disabled">Разрабатываем</a>
+        </div>
+
+        <div class="grid-block">
+            <h2>Список изменений</h2>
+            <p>Посмотрите, что нового</p>
+            <a href="upd.html" class="button">Взглянуть</a>
+        </div>
+    </div>
+
+    <!-- Кнопки внизу страницы (фиксированные) -->
     <div class="button-container">
+        <a href="index.html" class="button">
+            <i class="fas fa-home"></i> Главная
+        </a>
         <a href="https://t.me/cloud_helper" class="button">
             <i class="fab fa-telegram"></i> Telegram
         </a>
@@ -250,12 +224,6 @@
         </a>
         <a href="https://goo.su/d6Un7" class="button">
             <i class="fas fa-download"></i> Скачать
-        </a>
-        <a href="upd.html" class="button">
-            <i class="fas fa-list"></i> Список изменений
-        </a>
-        <a href="buy.html" class="button">
-            <i class="fas fa-shopping-cart"></i> Купить
         </a>
     </div>
 </body>
