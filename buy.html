@@ -11,7 +11,7 @@
             background: #000000; /* Черный фон */
             color: #ffffff;
             margin: 0;
-            padding: 0;
+            padding: 20px 10px; /* Уменьшаем отступы для мобильных устройств */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -20,9 +20,9 @@
         }
 
         h1 {
-            font-size: 36px;
+            font-size: 28px; /* Уменьшаем размер шрифта */
             font-weight: 700;
-            margin-bottom: 40px;
+            margin-bottom: 20px; /* Уменьшаем отступы */
             text-align: center;
             color: #ffffff;
             text-shadow: 0 4px 6px rgba(0, 191, 255, 0.3);
@@ -31,17 +31,18 @@
         /* Сетка блоков */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Адаптивная сетка */
+            gap: 15px; /* Уменьшаем отступы */
             max-width: 900px;
-            padding: 20px;
+            width: 100%;
+            padding: 10px; /* Уменьшаем отступы */
         }
 
         .grid-block {
             background: #1a1a1a;
             border: 2px solid #00bfff;
             border-radius: 10px;
-            padding: 20px;
+            padding: 15px; /* Уменьшаем отступы */
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -52,21 +53,21 @@
         }
 
         .grid-block h2 {
-            font-size: 24px;
+            font-size: 20px; /* Уменьшаем размер шрифта */
             margin-bottom: 10px;
             color: #00bfff;
         }
 
         .grid-block p {
-            font-size: 16px;
-            margin-bottom: 20px;
+            font-size: 14px; /* Уменьшаем размер шрифта */
+            margin-bottom: 15px; /* Уменьшаем отступы */
             color: #e0e0e0;
         }
 
         .grid-block .button {
             display: inline-block;
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 8px 16px; /* Уменьшаем отступы */
+            font-size: 14px; /* Уменьшаем размер шрифта */
             font-weight: 600;
             color: #ffffff;
             background: rgba(0, 191, 255, 0.1);
@@ -96,35 +97,24 @@
             transform: none;
         }
 
-        /* Центрирование двух блоков во второй строке */
-        .grid-container .centered {
-            grid-column: 2 / 3; /* Центрируем второй блок */
-        }
-
-        .grid-container .centered:nth-child(4) {
-            grid-column: 1 / 2; /* Первый блок во второй строке */
-        }
-
-        .grid-container .centered:nth-child(5) {
-            grid-column: 3 / 4; /* Второй блок во второй строке */
-        }
-
         /* Кнопки внизу страницы */
         .button-container {
             display: flex;
+            flex-wrap: wrap; /* Перенос кнопок на новую строку */
             justify-content: center;
-            gap: 20px;
-            padding: 40px 20px;
+            gap: 10px; /* Уменьшаем отступы */
+            padding: 20px 10px; /* Уменьшаем отступы */
             background: #000000;
             border-top: 2px solid #00bfff;
+            width: 100%;
         }
 
         .button-container .button {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 12px 24px;
-            font-size: 16px;
+            padding: 10px 20px; /* Уменьшаем отступы */
+            font-size: 14px; /* Уменьшаем размер шрифта */
             font-weight: 600;
             color: #ffffff;
             background: rgba(0, 191, 255, 0.1);
@@ -132,6 +122,7 @@
             border-radius: 8px;
             text-decoration: none;
             transition: background 0.3s ease, transform 0.3s ease;
+            flex: 1 1 150px; /* Гибкая ширина кнопок */
         }
 
         .button-container .button:hover {
@@ -141,6 +132,31 @@
 
         .button-container .button:active {
             transform: translateY(0);
+        }
+
+        /* Медиа-запросы для мобильных устройств */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 24px; /* Уменьшаем размер шрифта */
+            }
+
+            .grid-block h2 {
+                font-size: 18px; /* Уменьшаем размер шрифта */
+            }
+
+            .grid-block p {
+                font-size: 12px; /* Уменьшаем размер шрифта */
+            }
+
+            .grid-block .button {
+                font-size: 12px; /* Уменьшаем размер шрифта */
+                padding: 6px 12px; /* Уменьшаем отступы */
+            }
+
+            .button-container .button {
+                font-size: 12px; /* Уменьшаем размер шрифта */
+                padding: 8px 16px; /* Уменьшаем отступы */
+            }
         }
     </style>
     <!-- Иконки FontAwesome -->
@@ -171,16 +187,18 @@
         </div>
 
         <!-- Вторая строка: 2 блока по центру -->
-        <div class="grid-block centered">
+        <div class="grid-block">
             <h2>Funpay</h2>
             <p>Навсегда</p>
             <a href="#" class="button disabled">Разрабатываем</a>
         </div>
-<div class="grid-block">
+
+        <div class="grid-block">
             <h2>Donate</h2>
             <p>Поддержать проект</p>
             <a href="#" class="button disabled">Разрабатываем</a>
         </div>
+
         <div class="grid-block">
             <h2>Список изменений</h2>
             <p>Посмотрите, что нового</p>
