@@ -60,6 +60,7 @@
         /* Блоки с преимуществами */
         .features {
             display: flex;
+            flex-wrap: wrap; /* Добавляем перенос блоков на новую строку */
             justify-content: center;
             gap: 20px;
             padding: 50px 20px;
@@ -74,6 +75,7 @@
             max-width: 300px;
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            flex: 1 1 300px; /* Гибкая ширина блоков */
         }
 
         .feature-block:hover {
@@ -95,6 +97,7 @@
         /* Секция с картинкой и текстом */
         .design-section {
             display: flex;
+            flex-wrap: wrap; /* Добавляем перенос блоков на новую строку */
             align-items: center;
             justify-content: center;
             gap: 40px;
@@ -103,13 +106,14 @@
         }
 
         .design-section img {
-            max-width: 400px;
+            max-width: 100%; /* Картинка адаптируется под ширину экрана */
             border-radius: 10px;
             border: 2px solid #00bfff;
         }
 
         .design-text {
             max-width: 500px;
+            padding: 0 20px; /* Добавляем отступы для мобильных устройств */
         }
 
         .design-text p {
@@ -120,6 +124,7 @@
         /* Кнопки в конце страницы */
         .button-container {
             display: flex;
+            flex-wrap: wrap; /* Добавляем перенос кнопок на новую строку */
             justify-content: center;
             gap: 20px;
             padding: 40px 20px;
@@ -140,6 +145,7 @@
             border-radius: 8px;
             text-decoration: none;
             transition: background 0.3s ease, transform 0.3s ease;
+            flex: 1 1 200px; /* Гибкая ширина кнопок */
         }
 
         .button:hover {
@@ -149,6 +155,48 @@
 
         .button:active {
             transform: translateY(0);
+        }
+
+        /* Медиа-запросы для мобильных устройств */
+        @media (max-width: 768px) {
+            .hero-text {
+                margin: 0 10px 50px; /* Уменьшаем отступы */
+                padding: 15px;
+            }
+
+            .hero-text h1 {
+                font-size: 28px; /* Уменьшаем размер заголовка */
+            }
+
+            .hero-text p {
+                font-size: 16px; /* Уменьшаем размер текста */
+            }
+
+            .features {
+                padding: 30px 10px; /* Уменьшаем отступы */
+            }
+
+            .feature-block {
+                flex: 1 1 100%; /* Блоки занимают всю ширину */
+                max-width: 100%;
+            }
+
+            .design-section {
+                padding: 30px 10px; /* Уменьшаем отступы */
+            }
+
+            .design-text {
+                max-width: 100%; /* Текст занимает всю ширину */
+            }
+
+            .button-container {
+                padding: 20px 10px; /* Уменьшаем отступы */
+            }
+
+            .button {
+                flex: 1 1 100%; /* Кнопки занимают всю ширину */
+                margin: 5px 0; /* Добавляем отступы между кнопками */
+            }
         }
     </style>
     <!-- Иконки FontAwesome -->
