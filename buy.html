@@ -36,6 +36,7 @@
             max-width: 900px;
             width: 100%;
             padding: 10px; /* Уменьшаем отступы */
+            margin-bottom: 80px; /* Отступ для фиксированных кнопок */
         }
 
         .grid-block {
@@ -97,17 +98,20 @@
             transform: none;
         }
 
-        /* Кнопки внизу страницы */
+        /* Кнопки внизу страницы (фиксированные) */
         .button-container {
+            position: fixed; /* Фиксированная позиция */
+            bottom: 0; /* Прижимаем к нижней части экрана */
+            left: 0;
+            right: 0;
             display: flex;
             flex-wrap: wrap; /* Перенос кнопок на новую строку */
             justify-content: center;
             gap: 10px; /* Уменьшаем отступы */
-            padding: 20px 10px; /* Уменьшаем отступы */
+            padding: 10px; /* Уменьшаем отступы */
             background: #000000;
             border-top: 2px solid #00bfff;
-            width: 100%;
-            margin-top: 20px; /* Отступ от сетки */
+            z-index: 1000; /* Чтобы кнопки были поверх других элементов */
         }
 
         .button-container .button {
@@ -207,7 +211,7 @@
         </div>
     </div>
 
-    <!-- Кнопки внизу страницы -->
+    <!-- Кнопки внизу страницы (фиксированные) -->
     <div class="button-container">
         <a href="index.html" class="button">
             <i class="fas fa-home"></i> Главная
