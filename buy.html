@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приобрести Cloud Helper</title>
+    <style>
+        /* Основные стили */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000000; /* Черный фон */
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #ffffff;
+            text-shadow: 0 4px 6px rgba(0, 191, 255, 0.3);
+        }
+
+        /* Сетка блоков */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 900px;
+            padding: 20px;
+        }
+
+        .grid-block {
+            background: #1a1a1a;
+            border: 2px solid #00bfff;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .grid-block:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 191, 255, 0.5);
+        }
+
+        .grid-block h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #00bfff;
+        }
+
+        .grid-block p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #e0e0e0;
+        }
+
+        .grid-block .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            background: rgba(0, 191, 255, 0.1);
+            border: 2px solid #00bfff;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .grid-block .button:hover {
+            background: rgba(0, 191, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .grid-block .button:active {
+            transform: translateY(0);
+        }
+
+        .grid-block .button.disabled {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #666;
+            cursor: not-allowed;
+        }
+
+        .grid-block .button.disabled:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: none;
+        }
+
+        /* Центрирование двух блоков во второй строке */
+        .grid-container .centered {
+            grid-column: 2 / 3; /* Центрируем второй блок */
+        }
+
+        .grid-container .centered:nth-child(4) {
+            grid-column: 1 / 2; /* Первый блок во второй строке */
+        }
+
+        .grid-container .centered:nth-child(5) {
+            grid-column: 3 / 4; /* Второй блок во второй строке */
+        }
+
+        /* Кнопки внизу страницы */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 40px 20px;
+            background: #000000;
+            border-top: 2px solid #00bfff;
+        }
+
+        .button-container .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            background: rgba(0, 191, 255, 0.1);
+            border: 2px solid #00bfff;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .button-container .button:hover {
+            background: rgba(0, 191, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .button-container .button:active {
+            transform: translateY(0);
+        }
+    </style>
+    <!-- Иконки FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <h1>Приобрести Cloud Helper</h1>
+
+    <!-- Сетка блоков -->
+    <div class="grid-container">
+        <!-- Первая строка: 3 блока -->
+        <div class="grid-block">
+            <h2>Funpay</h2>
+            <p>На 7 дней</p>
+            <a href="#" class="button">Купить</a> <!-- Замените # на свою ссылку -->
+        </div>
+
+        <div class="grid-block">
+            <h2>Funpay</h2>
+            <p>На 14 дней</p>
+            <a href="#" class="button">Купить</a> <!-- Замените # на свою ссылку -->
+        </div>
+
+        <div class="grid-block">
+            <h2>Funpay</h2>
+            <p>На 30 дней</p>
+            <a href="#" class="button">Купить</a> <!-- Замените # на свою ссылку -->
+        </div>
+
+        <!-- Вторая строка: 2 блока по центру -->
+        <div class="grid-block centered">
+            <h2>Funpay</h2>
+            <p>Навсегда</p>
+            <a href="#" class="button disabled">Разрабатываем</a>
+        </div>
+<div class="grid-block">
+            <h2>Donate</h2>
+            <p>Поддержать проект</p>
+            <a href="#" class="button disabled">Разрабатываем</a>
+        </div>
+        <div class="grid-block">
+            <h2>Список изменений</h2>
+            <p>Посмотрите, что нового</p>
+            <a href="upd.html" class="button">Взглянуть</a>
+        </div>
+    </div>
+
+    <!-- Кнопки внизу страницы -->
+    <div class="button-container">
+        <a href="index.html" class="button">
+            <i class="fas fa-home"></i> Главная
+        </a>
+        <a href="https://t.me/cloud_helper" class="button">
+            <i class="fab fa-telegram"></i> Telegram
+        </a>
+        <a href="https://discord.gg/uMw7bpYGuw" class="button">
+            <i class="fab fa-discord"></i> Discord
+        </a>
+        <a href="https://goo.su/d6Un7" class="button">
+            <i class="fas fa-download"></i> Скачать
+        </a>
+    </div>
+</body>
+</html>

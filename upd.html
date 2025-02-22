@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список обновлений программы</title>
+    <style>
+        /* Основные стили */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000000; /* Черный фон */
+            color: #ffffff;
+            margin: 0;
+            padding: 40px 20px 100px; /* Отступ снизу для кнопок */
+            min-height: 100vh;
+        }
+
+        .update-container {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .update-block {
+            background: #000000; /* Черный фон блоков */
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 2px solid #00bfff; /* Голубая окантовка */
+            box-shadow: 0 8px 16px rgba(0, 191, 255, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .update-block:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 191, 255, 0.5);
+        }
+
+        .update-date {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+        }
+
+        .update-date::before {
+            content: "📅";
+            margin-right: 10px;
+            font-size: 24px;
+        }
+
+        .update-description {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #e0e0e0;
+        }
+
+        .update-description ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .update-description li {
+            margin-bottom: 8px;
+        }
+
+        /* Заголовок страницы */
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: #ffffff;
+            text-shadow: 0 4px 6px rgba(0, 191, 255, 0.3);
+        }
+
+        /* Кнопки (фиксированные внизу) */
+        .button-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #000000;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            border-top: 2px solid #00bfff;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            background: rgba(0, 191, 255, 0.1);
+            border: 2px solid #00bfff;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .button:hover {
+            background: rgba(0, 191, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .button:active {
+            transform: translateY(0);
+        }
+
+        /* Переключатель языка */
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .language-switcher button {
+            background: #ffffff; /* Белый фон для неактивной кнопки */
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            color: #000000; /* Черный текст */
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .language-switcher button.active {
+            background: #00bfff; /* Голубой фон для активной кнопки */
+            color: #000000; /* Черный текст */
+        }
+
+        .language-switcher button:hover {
+            opacity: 0.9;
+        }
+    </style>
+    <!-- Иконки FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Переключатель языка -->
+    <div class="language-switcher">
+        <button id="ru-btn" class="active">Русский</button>
+        <button id="en-btn">English</button>
+    </div>
+
+    <h1 id="title">История обновлений</h1>
+    <div class="update-container">
+        <!-- Блок обновления --> 
+<div class="update-block">
+            <div class="update-date" id="date-1">10 октября 2023</div>
+            <div class="update-description">
+                <ul id="changes-1">
+                    <li>Добавлена новая функция экспорта данных.</li>
+                    <li>Исправлены ошибки в модуле авторизации.</li>
+                    <li>Улучшена производительность при работе с большими файлами.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Блок обновления -->
+        <div class="update-block">
+            <div class="update-date" id="date-2">5 октября 2023</div>
+            <div class="update-description">
+                <ul id="changes-2">
+                    <li>Добавлена поддержка новых форматов файлов.</li>
+                    <li>Оптимизирован интерфейс пользователя.</li>
+                    <li>Исправлены мелкие баги.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Блок обновления -->
+        <div class="update-block">
+            <div class="update-date" id="date-3">1 октября 2023</div>
+            <div class="update-description">
+                <ul id="changes-3">
+                    <li>Первый релиз программы.</li>
+                    <li>Добавлены основные функции управления данными.</li>
+                    <li>Реализована система уведомлений.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Кнопки (фиксированные внизу) -->
+    <div class="button-container">
+        <a href="index.html" class="button">
+            <i class="fas fa-home"></i> Главная
+        </a>
+<a href="https://t.me/cloud_helper" class="button">
+            <i class="fab fa-telegram"></i> Telegram
+        </a>
+        <a href="https://discord.gg/uMw7bpYGuw" class="button">
+            <i class="fab fa-discord"></i> Discord
+        </a>
+        <a href="https://goo.su/d6Un7" class="button">
+            <i class="fas fa-download"></i> <span id="download-text">Скачать</span>
+        </a>
+    </div>
+
+    <script>
+        // Данные для перевода
+        const translations = {
+            ru: {
+                title: "История обновлений",
+                download: "Скачать",
+                updates: [
+                    {
+                        date: "10 октября 2023",
+                        changes: [
+                            "Добавлена новая функция экспорта данных.",
+                            "Исправлены ошибки в модуле авторизации.",
+                            "Улучшена производительность при работе с большими файлами."
+                        ]
+                    },
+                    {
+                        date: "5 октября 2023",
+                        changes: [
+                            "Добавлена поддержка новых форматов файлов.",
+                            "Оптимизирован интерфейс пользователя.",
+                            "Исправлены мелкие баги."
+                        ]
+                    },
+                    {
+                        date: "1 октября 2023",
+                        changes: [
+                            "Первый релиз программы.",
+                            "Добавлены основные функции управления данными.",
+                            "Реализована система уведомлений."
+                        ]
+                    }
+                ]
+            },
+            en: {
+                title: "Update History",
+                download: "Download",
+                updates: [
+                    {
+                        date: "October 10, 2023",
+                        changes: [
+                            "Added new data export feature.",
+                            "Fixed bugs in the authorization module.",
+                            "Improved performance when working with large files."
+                        ]
+                    },
+                    {
+                        date: "October 5, 2023",
+                        changes: [
+                            "Added support for new file formats.",
+                            "Optimized user interface.",
+                            "Fixed minor bugs."
+                        ]
+                    },
+                    {
+                        date: "October 1, 2023",
+                        changes: [
+                            "Initial release of the program.",
+                            "Added core data management features.",
+                            "Implemented notification system."
+                        ]
+                    }
+                ]
+            }
+        };
+
+        // Элементы для перевода
+        const title = document.getElementById("title");
+        const downloadText = document.getElementById("download-text");
+        const dateElements = [
+            document.getElementById("date-1"),
+            document.getElementById("date-2"),
+            document.getElementById("date-3")
+        ];
+        const changesElements = [
+            document.getElementById("changes-1"),
+            document.getElementById("changes-2"),
+            document.getElementById("changes-3")
+        ];
+
+        // Функция для перевода
+        function setLanguage(lang) {
+            const data = translations[lang];
+            title.textContent = data.title;
+            downloadText.textContent = data.download;
+
+            data.updates.forEach((update, index) => {
+                dateElements[index].textContent = update.date;
+                changesElements[index].innerHTML = update.changes.map(change => `<li>${change}</li>`).join("");
+            });
+
+            // Обновляем активную кнопку
+            document.querySelectorAll(".language-switcher button").forEach(button => {
+                button.classList.remove("active");
+            });
+            document.getElementById(`${lang}-btn`).classList.add("active");
+        }
+
+        // Обработчики для кнопок переключения языка
+        document.getElementById("ru-btn").addEventListener("click", () => setLanguage("ru"));
+        document.getElementById("en-btn").addEventListener("click", () => setLanguage("en"));
+
+        // Устанавливаем русский язык по умолчанию
+        setLanguage("ru");
+    </script>
+</body>
+</html>
