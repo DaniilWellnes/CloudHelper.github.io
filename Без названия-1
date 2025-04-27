@@ -1,0 +1,191 @@
+<?php
+session_start();
+
+// Настройки подключения к базе данных
+define('DB_HOST', 'localhost');
+define('DB_PORT', 3306);
+define('DB_USER', 'root');
+define('DB_PASS', 'root');
+define('DB_NAME', 'cloud');
+
+// Устанавливаем соединение с базой данных
+try {
+    $conn = new PDO(
+        "mysql:host=".DB_HOST.";port=".DB_PORT.";dbname=".DB_NAME.";charset=utf8mb4",
+        DB_USER,
+        DB_PASS,
+        [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES => false,
+        ]
+    );
+} catch (PDOException $e) {
+    die("Ошибка подключения к базе данных: " . $e->getMessage());
+}
+
+// Обработка формы регистрации
+if (isset($_POST['register'])) {
+    try {
+        $username = trim($_POST['username']);
+        $email = trim($_POST['email']);
+        $password_input = $_POST['password'];
+        
+        // Валидация данных
+        if (empty($username) || empty($email) || empty($password_input)) {
+            die("Все поля обязательны для заполнения");
+        }
+        
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            die("Некорректный email адрес");
+        }
+        
+        // Хеширование пароля
+        $hashed_password = password_hash($password_input, PASSWORD_DEFAULT);
+        
+        // Генерация уникального ownerid
+        function generateRandomString($length) {
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $charactersLength = strlen($characters);
+            $randomString = '';
+            for ($i = 0; $i < $length; $i++) {
+                $randomString .= $characters[rand(0, $charactersLength - 1)];
+            }
+            return $randomString;
+        }
+        
+        function isOwnerIdUnique($conn, $ownerid) {
+            $stmt = $conn->prepare("SELECT COUNT(*) FROM accounts WHERE ownerid = :ownerid");
+            $stmt->bindParam(':ownerid', $ownerid);
+            $stmt->execute();
+            return $stmt->fetchColumn() == 0;
+        }
+        
+        $ownerid = '';
+        do {
+            $length = rand(10, 20);
+            $ownerid = generateRandomString($length);
+        } while (!isOwnerIdUnique($conn, $ownerid));
+        
+        // Проверка существования пользователя
+        $stmt = $conn->prepare("SELECT COUNT(*) FROM accounts WHERE email = :email OR username = :username");
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
+        
+        if ($stmt->fetchColumn() > 0) {
+            die("Пользователь с таким email или username уже существует");
+        }
+        
+        // Регистрация нового пользователя
+        $stmt = $conn->prepare("INSERT INTO accounts (username, email, password, ownerid, role, owner, keylevels) 
+                               VALUES (:username, :email, :password, :ownerid, 'Trial', 'SiteCloudAuthKey.ru', '10')");
+        
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password', $hashed_password);
+        $stmt->bindParam(':ownerid', $ownerid);
+        $stmt->execute();
+        
+        // Автоматическая авторизация после регистрации
+        $_SESSION['user'] = $username;
+        $_SESSION['role'] = 'Trial';
+        
+        // Логирование
+        $auditStmt = $conn->prepare(
+            "INSERT INTO auditlog (user, event, time, app) 
+             VALUES (:user, 'Регистрация и вход', NOW(), 'CloudKeyAuth')"
+        );
+        $auditStmt->bindParam(':user', $username);
+        $auditStmt->execute();
+        
+        header("Location: http://cloudkeyauth.local/app");
+        exit();
+        
+    } catch(PDOException $e) {
+        error_log("Database error: " . $e->getMessage());
+        die("Произошла ошибка при регистрации. Пожалуйста, попробуйте позже.");
+    }
+}
+
+// Проверка активной сессии
+if (isset($_SESSION['user'])) {
+    try {
+        $stmt = $conn->prepare("SELECT username FROM accounts WHERE username = :username");
+        $stmt->bindParam(':username', $_SESSION['user']);
+        $stmt->execute();
+        
+        if ($stmt->rowCount() === 1) {
+            // Проверяем последнюю активность
+            $auditStmt = $conn->prepare("
+                SELECT time FROM auditlog 
+                WHERE user = :user 
+                AND (event = 'Успешный вход в систему' OR event = 'Посещение личного кабинета' OR event = 'Регистрация и вход')
+                ORDER BY time DESC 
+                LIMIT 1
+            ");
+            $auditStmt->bindParam(':user', $_SESSION['user']);
+            $auditStmt->execute();
+            
+            if ($auditStmt->rowCount() > 0) {
+                $lastActivity = strtotime($auditStmt->fetch()['time']);
+                if ((time() - $lastActivity) < 1800) { // 30 минут
+                    header("Location: http://cloudkeyauth.local/app");
+                    exit();
+                }
+            }
+        }
+        // Если проверки не прошли, очищаем сессию
+        session_unset();
+        session_destroy();
+    } catch (PDOException $e) {
+        error_log("Session check error: " . $e->getMessage());
+    }
+}
+
+// Обработка формы входа
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'], $_POST['password'])) {
+    $username = trim($_POST['username']);
+    $password = $_POST['password'];
+    
+    try {
+        $stmt = $conn->prepare("SELECT username, password, role FROM accounts WHERE username = :username");
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
+        
+        if ($stmt->rowCount() === 1) {
+            $user = $stmt->fetch();
+            
+            if (password_verify($password, $user['password'])) {
+                $_SESSION['user'] = $user['username'];
+                $_SESSION['role'] = $user['role'];
+                
+                $auditStmt = $conn->prepare(
+                    "INSERT INTO auditlog (user, event, time, app) 
+                     VALUES (:user, 'Успешный вход в систему', NOW(), 'CloudKeyAuth')"
+                );
+                $auditStmt->bindParam(':user', $user['username']);
+                $auditStmt->execute();
+                
+                header("Location: http://cloudkeyauth.local/app");
+                exit();
+            } else {
+                $error = "Неверный логин или пароль";
+            }
+        } else {
+            $error = "Неверный логин или пароль";
+        }
+        
+        $auditStmt = $conn->prepare(
+            "INSERT INTO auditlog (user, event, time, app) 
+             VALUES (:user, 'Неудачная попытка входа', NOW(), 'CloudKeyAuth')"
+        );
+        $auditStmt->bindParam(':user', $username);
+        $auditStmt->execute();
+        
+    } catch (PDOException $e) {
+        error_log("Login error: " . $e->getMessage());
+        $error = "Произошла ошибка при авторизации. Пожалуйста, попробуйте позже.";
+    }
+}
+?>

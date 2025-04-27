@@ -1,0 +1,556 @@
+<?php
+session_start();
+
+
+// Проверка авторизации
+if (!isset($_SESSION['user'])) {
+
+    die('<a href="https://cloudauthkey.local/login/" target="_blank">Сессия не найдена, авторизируйтесь заново. Перейти на страницу авторизации.</a>');
+
+    
+}
+
+// Настройки подключения к базе данных
+define('DB_HOST', 'localhost');
+define('DB_PORT', 3306);
+define('DB_USER', 'root');
+define('DB_PASS', 'root');
+define('DB_NAME', 'cloud');
+
+// Устанавливаем соединение с базой данных
+try {
+    $conn = new PDO(
+        "mysql:host=".DB_HOST.";port=".DB_PORT.";dbname=".DB_NAME.";charset=utf8mb4",
+        DB_USER,
+        DB_PASS,
+        [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES => false,
+        ]
+    );
+} catch (PDOException $e) {
+    die("Ошибка подключения к базе данных: " . $e->getMessage());
+}
+
+// Получаем данные пользователя из базы данных
+try {
+    $user = $_SESSION['user'];
+    $stmt = $conn->prepare("SELECT ownerid, role FROM accounts WHERE username = :username");
+    $stmt->bindParam(':username', $user);
+    $stmt->execute();
+    
+    if ($stmt->rowCount() === 1) {
+        $userData = $stmt->fetch();
+        $userId = $userData['ownerid'];
+        $userRole = htmlspecialchars($userData['role'], ENT_QUOTES, 'UTF-8');
+    } else {
+        die("Пользователь не найден в базе данных");
+    }
+} catch (PDOException $e) {
+    die("Ошибка получения данных пользователя: " . $e->getMessage());
+}
+
+// Функция проверки приложений
+function check_apps($conn, $userId, $user) {
+    // Получаем приложения пользователя
+    $userApps = [];
+    try {
+        $stmt = $conn->prepare("SELECT name, enabled FROM apps WHERE ownerid = :ownerid");
+        $stmt->bindParam(':ownerid', $userId);
+        $stmt->execute();
+        $userApps = $stmt->fetchAll();
+    } catch (PDOException $e) {
+        error_log("Ошибка получения приложений пользователя: " . $e->getMessage());
+    }
+
+    // Логируем посещение личного кабинета
+    try {
+        $event = "Посещение личного кабинета";
+        $app = "CloudKeyAuth";
+        $time = date('Y-m-d H:i:s');
+
+        $auditStmt = $conn->prepare(
+            "INSERT INTO auditlog (user, event, time, app) VALUES (:user, :event, NOW(), :app)"
+        );
+        $auditStmt->execute([
+            ':user' => $user,
+            ':event' => $event,
+            ':app' => $app
+        ]);
+    } catch (PDOException $e) {
+        error_log("Ошибка записи в auditlog: " . $e->getMessage());
+    }
+    
+    return $userApps;
+}
+
+// Функция генерации случайной строки
+function generateRandomString($length) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $randomString = '';
+    $max = strlen($characters) - 1;
+    
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[random_int(0, $max)];
+    }
+    return $randomString;
+}
+
+// Обработка создания нового приложения
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_app'])) {
+    try {
+        $appName = trim($_POST['appname']);
+        
+        // Проверка на пустое название
+        if (empty($appName)) {
+            throw new Exception("Название приложения не может быть пустым");
+        }
+        
+        // Генерация уникальных значений
+        do {
+            $secret = generateRandomString(random_int(32, 64));
+            $sellerKey = generateRandomString(random_int(10, 32));
+            
+            // Проверка уникальности
+            $stmt = $conn->prepare("SELECT COUNT(*) FROM apps WHERE secret = :secret OR sellerkey = :sellerkey");
+            $stmt->bindParam(':secret', $secret);
+            $stmt->bindParam(':sellerkey', $sellerKey);
+            $stmt->execute();
+            
+            $count = $stmt->fetchColumn();
+        } while ($count > 0);
+        
+        // Вставка нового приложения
+        $stmt = $conn->prepare("
+            INSERT INTO apps (owner, name, secret, ownerid, enabled, hwidcheck, sellerkey) 
+            VALUES (:owner, :name, :secret, :ownerid, 1, 1, :sellerkey)
+        ");
+        
+        $stmt->execute([
+            ':owner' => $user,
+            ':name' => $appName,
+            ':secret' => $secret,
+            ':ownerid' => $userId,
+            ':sellerkey' => $sellerKey
+        ]);
+        
+        // Логирование
+        $event = "Создано новое приложение: " . $appName;
+        $auditStmt = $conn->prepare(
+            "INSERT INTO auditlog (user, event, time, app) VALUES (:user, :event, NOW(), :app)"
+        );
+        $auditStmt->execute([
+            ':user' => $user,
+            ':event' => $event,
+            ':app' => $appName
+        ]);
+        
+        // Перенаправление на страницу приложений
+        header("Location: https://cloudauthkey.local/panel/application/");
+        exit();
+        
+    } catch (Exception $e) {
+        $errorMessage = "Ошибка при создании приложения: " . $e->getMessage();
+        error_log($errorMessage);
+        // Можно добавить сохранение ошибки в сессию для отображения на странице
+        $_SESSION['error'] = $errorMessage;
+        header("Location: " . $_SERVER['HTTP_REFERER']);
+        exit();
+    }
+}
+
+// Проверяем приложения при загрузке страницы
+$userApps = check_apps($conn, $userId, $user);
+$username = htmlspecialchars($_SESSION['user'], ENT_QUOTES, 'UTF-8');
+
+?>
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html><html lang="ru" class="bg-[#09090d] text-white overflow-x-hidden dark" data-bybit-channel-name="tJ_DQ5sz5cWO2LrOOCPy7" data-bybit-is-default-wallet="true" data-scrapbook-source="https://cloudauthkey.local" data-scrapbook-create="20250315104223293"><head><meta charset="UTF-8"><style>body {transition: opacity ease-in 0.2s; } 
+body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relative; } 
+</style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="highlight.css">
+    
+    
+    
+
+    <link href="remixicon.css" rel="stylesheet">
+
+    <link href="lineicons.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/jpg" href="favicon.png">
+
+    <link href="datatables.bundle.css" rel="stylesheet" type="text/css">
+
+    <meta name="apple-itunes-app" content="app-id=6503321465">
+
+    <title>CloudAuthKey</title>
+
+    
+
+    <link rel="stylesheet" href="dashboard.css">
+    
+    <link rel="stylesheet" href="css2.css">
+
+    <link rel="stylesheet" href="output.css">
+<body style="overflow: visible;">
+    
+
+    <nav class="fixed top-0 left-0 right-0 z-50 w-full bg-[#0f0f17] border-b border-[#09090d] shadow-lg">
+    <div class="py-3 px-3 lg:px-5 lg:pl-3">
+        <div class="flex justify-between items-center">
+            <div class="flex justify-start items-center">
+                <div class="hidden p-2 text-white rounded cursor-pointer lg:inline hover:opacity-60 transition duration-200 -ml-8">
+                    <div class="w-6 h-6"></div>
+                </div>
+                <a href="https://cloudauthkey.local">
+                    <img src="KeyauthBanner.png" alt="CloudAuthKey Icon" style="max-width: 303px; height: auto;">
+                </a>
+            </div>
+
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="https://CloudAuthKey.online/" target="_blank" class="inline-flex items-center text-white hover:opacity-60 hover:text-blue-400 transition duration-200 text-sm px-4 py-2">
+                    <i class="ri-code-s-slash-line mr-2"></i>Документация
+                </a>
+
+                <a href="https://github.com/CloudAuthKey" target="_blank" class="inline-flex items-center text-white hover:opacity-60 hover:text-blue-400 transition duration-200 text-sm px-4 py-2">
+                    <i class="ri-github-fill mr-2"></i>Примеры приложений
+                </a>
+
+                <a href="https://youtube.com/CloudAuthKey" target="_blank" class="inline-flex items-center text-white hover:opacity-60 hover:text-blue-400 transition duration-200 text-sm px-4 py-2">
+                    <i class="ri-youtube-line mr-2"></i>Видео обзоры
+                </a>
+
+                <a href="https://t.me/CloudAuthKey" target="_blank" class="inline-flex items-center text-white hover:opacity-60 hover:text-blue-400 transition duration-200 text-sm px-4 py-2">
+                    <i class="ri-telegram-2-line mr-2"></i>Телеграм
+                </a>
+            </div>
+
+            <!-- Мобильное меню (бургер) -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white hover:opacity-60 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Мобильное меню (скрыто по умолчанию) -->
+    <div id="mobile-menu" class="hidden md:hidden bg-[#0f0f17] border-t border-[#09090d]">
+        <div class="px-2 pt-2 pb-3 space-y-1">
+            <a href="https://CloudAuthKey.online/" target="_blank" class="block px-3 py-2 text-white hover:opacity-60 hover:bg-[#09090d] rounded-md text-sm">
+                <i class="ri-code-s-slash-line mr-2"></i>Документация
+            </a>
+            <a href="https://github.com/CloudAuthKey" target="_blank" class="block px-3 py-2 text-white hover:opacity-60 hover:bg-[#09090d] rounded-md text-sm">
+                <i class="ri-github-fill mr-2"></i>Примеры приложений
+            </a>
+            <a href="https://youtube.com/CloudAuthKey" target="_blank" class="block px-3 py-2 text-white hover:opacity-60 hover:bg-[#09090d] rounded-md text-sm">
+                <i class="ri-youtube-line mr-2"></i>Видео обзоры
+            </a>
+            <a href="https://t.me/CloudAuthKey" target="_blank" class="block px-3 py-2 text-white hover:opacity-60 hover:bg-[#09090d] rounded-md text-sm">
+                <i class="ri-telegram-2-line mr-2"></i>Телеграм
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- Добавьте этот скрипт для работы мобильного меню -->
+<script>
+    document.getElementById('mobile-menu-button').addEventListener('click', function() {
+        const menu = document.getElementById('mobile-menu');
+        menu.classList.toggle('hidden');
+    });
+</script>
+
+<!-- Добавьте этот стиль, чтобы основной контент не скрывался под навигацией -->
+<style>
+    body {
+        padding-top: 64px; /* Высота навигационной панели */
+    }
+</style>
+
+<div class="flex overflow-hidden pt-16 bg-[#09090d]">
+    
+    
+<style>
+/* Hide vertical scrollbar for Webkit-based browsers (e.g., Chrome, Safari) */
+*::-webkit-scrollbar {
+    display: none;
+}
+</style>
+
+<aside id="sidebar" class="flex hidden fixed top-0 left-0 z-20 flex-col flex-shrink-0 pt-16 w-64 h-full duration-200 lg:flex transition-width" aria-label="Sidebar">
+    <div class="flex relative flex-col flex-1 pt-0 min-h-0 bg-[#0f0f17] border-r border-[#0f0f17]">
+        <div class="flex overflow-y-auto flex-col flex-1 pt-5 pb-4">
+            <div class="flex-1 px-3 space-y-1 bg-[#0f0f17] mt-8">
+                
+                
+                
+                <!-- Модальное окно выхода -->
+<div class="w-full max-w-sm border border-gray-700 rounded-lg shadow">
+    <div class="flex justify-end px-4 pt-2">
+        <button id="dropdownButton" class="inline-block text-gray-500 hover:opacity-60 focus:ring-0 p-1.5" type="button" onclick="document.getElementById('logout-modal').classList.remove('hidden')">
+            <span class="sr-only">Выход</span>
+            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"></path>
+            </svg>
+        </button>
+    </div>
+
+    <div class="flex items-center px-4 pb-4 ml-6">
+        <img class="w-12 h-12 rounded-full mr-3" src="favicon.png" alt="profile image">
+        <div class="ml-4 flex flex-col mr-4">
+            <h5 class="text-lg font-medium text-white-700 ml-5"><?= $username ?></h5>
+            <label class="text-sm text-gray-400"><b>Срок действия истекает:</b> Никогда</label>
+        </div>
+    </div>
+
+<div class="px-4 pb-4">
+    <p class="text-center text-purple-500 text-sm font-black px-1.5 py-0.5 rounded border border-purple-500 mb-2">
+    <?php echo $userRole; ?>
+</p>
+    
+</div>
+    
+</div>
+
+<!-- Модальное окно выхода -->
+<div id="logout-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full justify-center items-center flex hidden" aria-modal="true" role="dialog">
+    <div class="relative w-full max-w-md max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-[#0f0f17] rounded-lg border border-gray-700 shadow">
+            <div class="px-6 py-6 lg:px-8">
+                <h3 class="mb-4 text-xl font-medium text-white">Подтверждение выхода</h3>
+                <hr class="h-px mb-4 mt-4 bg-gray-700 border-0">
+                <p class="text-gray-400 mb-6">Вы уверены, что хотите выйти из аккаунта?</p>
+                <form class="space-y-6" method="POST" action="https://cloudauthkey.local/app/logout">
+                    <div class="flex justify-end space-x-4">
+                        <button type="button" onclick="document.getElementById('logout-modal').classList.add('hidden')" class="text-white bg-gray-700 hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center transition duration-200">
+                            Отмена
+                        </button>
+                        <button type="submit" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center transition duration-200">
+                            Выйти
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Встроенный JavaScript -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const modal = document.getElementById('logout-modal');
+
+        modal.addEventListener('click', function (event) {
+            if (event.target === modal) {
+                modal.classList.add('hidden');
+            }
+        });
+    });
+</script>
+
+    <!-- Модальное окно выхода -->
+    
+
+                
+                
+<ul class="space-y-2 font-medium">
+    <li>
+        <span class="flex items-center p-2 rounded-lg text-purple-500 cursor-not-allowed opacity-50">
+            <span class="ml-3">Приложения</span>
+        </span>
+    </li>
+</ul>
+<ul class="space-y-2 font-medium">
+<li>
+            <a href="/panel/application/" class="flex items-center p-2 rounded-lg text-gray-300 hover:text-white group">
+                <span class="ml-3">Данные приложения</span>
+            </a>
+        </li>
+</ul>
+                
+                
+<div class="mb-4 border-b border-[#0f0f17]">
+    <ul class="flex items-center text-base font-medium text-center" id="myTab" role="tablist">                  
+        <li class="text-purple hover:text-purple p-4" id="account-tab" data-tabs-target="#account" role="tab" data-tbt="account" aria-controls="account" aria-selected="true" data-popover-target="account-popover">
+            Настройки приложения
+        </li>
+    </ul>
+</div>
+
+
+                    <div class="rounded-lg" id="app" role="tabpanel" aria-labelledby="app-tab">
+    <ul class="space-y-2 font-medium">
+        <li>
+            <a href="/panel/app/licenses/" class="flex items-center p-2 rounded-lg text-gray-300 hover:text-white group">
+                <span class="ml-3">Ключи</span>
+            </a>
+        </li>
+        <li>
+            <a href="/panel/app/users/" class="flex items-center p-2 rounded-lg text-gray-300 hover:text-white group">
+                <span class="ml-3">Пользователи</span>
+            </a>
+        </li>
+        <li>
+            <a href="/panel/app/tokens/" class="flex items-center p-2 rounded-lg text-gray-300 hover:text-white group">
+                <span class="ml-3">Токены</span>
+            </a>
+        </li>
+        <li>
+            <a href="/panel/app/subscriptions/" class="flex items-center p-2 rounded-lg text-gray-300 hover:text-white group">
+                <span class="ml-3">Подписки для приложения</span>
+            </a>
+        </li>
+        <li>
+            <a href="/panel/app/chats/" class="flex items-center p-2 rounded-lg text-gray-300 hover:text-white group">
+                <span class="ml-3">Чаты</span>
+            </a>
+        </li>
+        <li>
+            <a href="/panel/app/sessions/" class="flex items-center p-2 rounded-lg text-gray-300 hover:text-white group">
+                <span class="ml-3">Сессии</span>
+            </a>
+        </li>
+        <li>
+            <a href="/panel/app/webhooks/" class="flex items-center p-2 rounded-lg text-gray-300 hover:text-white group">
+                <span class="ml-3">Вебхуки</span>
+            </a>
+        </li>
+        <li>
+            <a href="/panel/app/files/" class="flex items-center p-2 rounded-lg text-gray-300 hover:text-white group">
+                <span class="ml-3">Файлы</span>
+            </a>
+        </li>
+        <li>
+            <a href="/panel/app/vars/" class="flex items-center p-2 rounded-lg text-gray-300 hover:text-white group">
+                <span class="ml-3">Серверные переменные</span>
+            </a>
+        </li>
+        <li>
+            <a href="/panel/app/logs/" class="flex items-center p-2 rounded-lg text-gray-300 hover:text-white group">
+                <span class="ml-3">История действий</span>
+            </a>
+        </li>
+        <li>
+            <a href="/panel/app/blacklists/" class="flex items-center p-2 rounded-lg text-gray-300 hover:text-white group">
+                <span class="ml-3">Черный список</span>
+            </a>
+        </li>
+        <li>
+            <a href="/panel/app/whitelists/" class="flex items-center p-2 rounded-lg text-gray-300 hover:text-white group">
+                <span class="ml-3">Белый список</span>
+            </a>
+        </li>
+        <li>
+            <a href="/panel/app/app-settings/" class="flex items-center p-2 rounded-lg text-gray-300 hover:text-white group">
+                <span class="ml-3">Настройки</span>
+            </a>
+        </li>
+        <li>
+            <a href="/panel/app/audit-logs/" class="flex items-center p-2 rounded-lg text-gray-300 hover:text-white group">
+                <span class="ml-3">Журналы аудита</span>
+            </a>
+        </li>
+    </ul>
+</div>
+                
+                
+                                        <div class="mb-4 border-b border-[#0f0f17]">
+    <ul class="flex items-center text-base font-medium text-center" id="myTab" role="tablist">                  
+        <li class="text-white hover:text-white p-4" id="account-tab" data-tabs-target="#account" role="tab" data-tbt="account" aria-controls="account" aria-selected="true" data-popover-target="account-popover">
+            Прочее
+        </li>
+    </ul>
+</div>
+                
+                
+                    <div class="p-0 rounded-lg" id="account" role="tabpanel" aria-labelledby="account-tab">
+                        <ul class="space-y-2 font-medium">
+                            <li>
+                                <a href="/forms/" class="flex items-center p-2 rounded-lg text-gray-300 hover:text-white group">
+                                    <span class="ml-3">Обратная связь</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/upgrade/" class="flex items-center p-2 rounded-lg text-gray-300 hover:text-white group">
+                                    <span class="ml-3">Пожертвование</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/panel/app/account-settings" class="flex items-center p-2 rounded-lg text-gray-300 hover:text-white group">
+                                    <span class="ml-3">Настройки</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                        </ul>
+                    </div>
+   
+                </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</aside>
+    <div class="hidden fixed inset-0 z-10" id="sidebarBackdrop"></div>
+    <div id="main-content" class="overflow-y-auto relative w-full h-full lg:ml-64">
+        <main>
+<div class="p-4 bg-[#09090d] block sm:flex items-center justify-between lg:mt-1.5">
+    <div class="mb-1 w-full bg-[#0f0f17] mt-2 md:mt-2 rounded-xl">
+        <div class="mb-1 w-full bg-[#0f0f17] mt-4 md:mt-2 rounded-xl">
+                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg pt-5 pb-5 pl-3 pr-3">
+                    <table class="w-full text-sm text-left text-white">
+                        <thead>
+                            <tr class="fw-bolder fs-6 text-blue-700 px-7">
+                                <th class="px-6 py-3">Application Name</th>
+                                <th class="px-6 py-3">Status</th>
+                                <th class="px-6 py-3 text-right">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                                        <tr class="hover:bg-[#09090d]">
+                                <td class="px-6 py-2">
+                                    asd                                </td>
+                                <td class="px-5 py-2">
+                                    <span class="bg-green-800 text-green-100 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">
+                                        Active                                    </span>
+                                </td>
+                                <td class="px-6 py-2 grid place-items-end pr-6">
+                                    <form method="POST">
+                                        <button value="asd" name="selectApp" class="flex items-center">
+                                            <span class="h-2.5 w-2.5 rounded-full bg-blue-500"></span>
+                                            <span class="ml-2">Selected</span>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                                                    </tbody>
+                    </table>
+                </div>
+            </div>
+
+</div>
+            </div>
+        </main>
+
+    </div>
+</div>
+<link href="lineicons.css" rel="stylesheet">

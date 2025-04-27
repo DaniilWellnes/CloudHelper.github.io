@@ -1,0 +1,943 @@
+<!DOCTYPE html><html lang="en" class="bg-[#09090d] text-white overflow-x-hidden dark" data-bybit-channel-name="FMcnAuKwG1EMY-LuEGldG" data-bybit-is-default-wallet="true" data-scrapbook-source="https://keyauth.win/app/?page=licenses" data-scrapbook-create="20250228100800399"><head><meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="highlight.css">
+    
+    
+    
+
+    <link href="remixicon.css" rel="stylesheet">
+
+    <link href="lineicons.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/jpg" href="favicon.png">
+
+    <link href="datatables.bundle.css" rel="stylesheet" type="text/css">
+
+    <meta name="apple-itunes-app" content="app-id=6503321465">
+
+    <title>KeyAuth - Open Source Auth</title>
+
+    
+
+    <link rel="stylesheet" href="dashboard.css">
+    
+    <link rel="stylesheet" href="css2.css">
+
+    <link rel="stylesheet" href="output.css">
+     
+
+
+    
+    
+
+    <!-- For MD5 hash conversion -->
+    
+<style>:root{--swal2-container-padding: 0.625em;--swal2-backdrop: rgba(0, 0, 0, 0.4);--swal2-width: 32em;--swal2-padding: 0 0 1.25em;--swal2-border: none;--swal2-border-radius: 0.3125rem;--swal2-background: white;--swal2-color: #545454;--swal2-footer-border-color: #eee;--swal2-show-animation: swal2-show 0.3s;--swal2-hide-animation: swal2-hide 0.15s forwards;--swal2-input-background: transparent;--swal2-progress-step-background: #add8e6;--swal2-validation-message-background: #f0f0f0;--swal2-validation-message-color: #666;--swal2-close-button-position: initial;--swal2-close-button-inset: auto;--swal2-close-button-font-size: 2.5em;--swal2-close-button-color: #ccc}[data-swal2-theme=dark]{--swal2-dark-theme-black: #19191a;--swal2-dark-theme-white: #e1e1e1;--swal2-background: var(--swal2-dark-theme-black);--swal2-color: var(--swal2-dark-theme-white);--swal2-footer-border-color: #555;--swal2-input-background: color-mix(in srgb, var(--swal2-dark-theme-black), var(--swal2-dark-theme-white) 10%);--swal2-validation-message-background: color-mix( in srgb, var(--swal2-dark-theme-black), var(--swal2-dark-theme-white) 10% );--swal2-validation-message-color: var(--swal2-dark-theme-white)}@media(prefers-color-scheme: dark){[data-swal2-theme=auto]{--swal2-dark-theme-black: #19191a;--swal2-dark-theme-white: #e1e1e1;--swal2-background: var(--swal2-dark-theme-black);--swal2-color: var(--swal2-dark-theme-white);--swal2-footer-border-color: #555;--swal2-input-background: color-mix(in srgb, var(--swal2-dark-theme-black), var(--swal2-dark-theme-white) 10%);--swal2-validation-message-background: color-mix( in srgb, var(--swal2-dark-theme-black), var(--swal2-dark-theme-white) 10% );--swal2-validation-message-color: var(--swal2-dark-theme-white)}}body.swal2-shown:not(.swal2-no-backdrop,.swal2-toast-shown){overflow:hidden}body.swal2-height-auto{height:auto !important}body.swal2-no-backdrop .swal2-container{background-color:rgba(0,0,0,0) !important;pointer-events:none}body.swal2-no-backdrop .swal2-container .swal2-popup{pointer-events:all}body.swal2-no-backdrop .swal2-container .swal2-modal{box-shadow:0 0 10px var(--swal2-backdrop)}body.swal2-toast-shown .swal2-container{box-sizing:border-box;width:360px;max-width:100%;background-color:rgba(0,0,0,0);pointer-events:none}body.swal2-toast-shown .swal2-container.swal2-top{inset:0 auto auto 50%;transform:translateX(-50%)}body.swal2-toast-shown .swal2-container.swal2-top-end,body.swal2-toast-shown .swal2-container.swal2-top-right{inset:0 0 auto auto}body.swal2-toast-shown .swal2-container.swal2-top-start,body.swal2-toast-shown .swal2-container.swal2-top-left{inset:0 auto auto 0}body.swal2-toast-shown .swal2-container.swal2-center-start,body.swal2-toast-shown .swal2-container.swal2-center-left{inset:50% auto auto 0;transform:translateY(-50%)}body.swal2-toast-shown .swal2-container.swal2-center{inset:50% auto auto 50%;transform:translate(-50%, -50%)}body.swal2-toast-shown .swal2-container.swal2-center-end,body.swal2-toast-shown .swal2-container.swal2-center-right{inset:50% 0 auto auto;transform:translateY(-50%)}body.swal2-toast-shown .swal2-container.swal2-bottom-start,body.swal2-toast-shown .swal2-container.swal2-bottom-left{inset:auto auto 0 0}body.swal2-toast-shown .swal2-container.swal2-bottom{inset:auto auto 0 50%;transform:translateX(-50%)}body.swal2-toast-shown .swal2-container.swal2-bottom-end,body.swal2-toast-shown .swal2-container.swal2-bottom-right{inset:auto 0 0 auto}@media print{body.swal2-shown:not(.swal2-no-backdrop,.swal2-toast-shown){overflow-y:scroll !important}body.swal2-shown:not(.swal2-no-backdrop,.swal2-toast-shown)>[aria-hidden=true]{display:none}body.swal2-shown:not(.swal2-no-backdrop,.swal2-toast-shown) .swal2-container{position:static !important}}div:where(.swal2-container){display:grid;position:fixed;z-index:1060;inset:0;box-sizing:border-box;grid-template-areas:"top-start     top            top-end" "center-start  center         center-end" "bottom-start  bottom-center  bottom-end";grid-template-rows:minmax(min-content, auto) minmax(min-content, auto) minmax(min-content, auto);height:100%;padding:var(--swal2-container-padding);overflow-x:hidden;transition:background-color .1s;-webkit-overflow-scrolling:touch}div:where(.swal2-container).swal2-backdrop-show,div:where(.swal2-container).swal2-noanimation{background:var(--swal2-backdrop)}div:where(.swal2-container).swal2-backdrop-hide{background:rgba(0,0,0,0) !important}div:where(.swal2-container).swal2-top-start,div:where(.swal2-container).swal2-center-start,div:where(.swal2-container).swal2-bottom-start{grid-template-columns:minmax(0, 1fr) auto auto}div:where(.swal2-container).swal2-top,div:where(.swal2-container).swal2-center,div:where(.swal2-container).swal2-bottom{grid-template-columns:auto minmax(0, 1fr) auto}div:where(.swal2-container).swal2-top-end,div:where(.swal2-container).swal2-center-end,div:where(.swal2-container).swal2-bottom-end{grid-template-columns:auto auto minmax(0, 1fr)}div:where(.swal2-container).swal2-top-start>.swal2-popup{align-self:start}div:where(.swal2-container).swal2-top>.swal2-popup{grid-column:2;place-self:start center}div:where(.swal2-container).swal2-top-end>.swal2-popup,div:where(.swal2-container).swal2-top-right>.swal2-popup{grid-column:3;place-self:start end}div:where(.swal2-container).swal2-center-start>.swal2-popup,div:where(.swal2-container).swal2-center-left>.swal2-popup{grid-row:2;align-self:center}div:where(.swal2-container).swal2-center>.swal2-popup{grid-column:2;grid-row:2;place-self:center center}div:where(.swal2-container).swal2-center-end>.swal2-popup,div:where(.swal2-container).swal2-center-right>.swal2-popup{grid-column:3;grid-row:2;place-self:center end}div:where(.swal2-container).swal2-bottom-start>.swal2-popup,div:where(.swal2-container).swal2-bottom-left>.swal2-popup{grid-column:1;grid-row:3;align-self:end}div:where(.swal2-container).swal2-bottom>.swal2-popup{grid-column:2;grid-row:3;place-self:end center}div:where(.swal2-container).swal2-bottom-end>.swal2-popup,div:where(.swal2-container).swal2-bottom-right>.swal2-popup{grid-column:3;grid-row:3;place-self:end end}div:where(.swal2-container).swal2-grow-row>.swal2-popup,div:where(.swal2-container).swal2-grow-fullscreen>.swal2-popup{grid-column:1/4;width:100%}div:where(.swal2-container).swal2-grow-column>.swal2-popup,div:where(.swal2-container).swal2-grow-fullscreen>.swal2-popup{grid-row:1/4;align-self:stretch}div:where(.swal2-container).swal2-no-transition{transition:none !important}div:where(.swal2-container) div:where(.swal2-popup){display:none;position:relative;box-sizing:border-box;grid-template-columns:minmax(0, 100%);width:var(--swal2-width);max-width:100%;padding:var(--swal2-padding);border:var(--swal2-border);border-radius:var(--swal2-border-radius);background:var(--swal2-background);color:var(--swal2-color);font-family:inherit;font-size:1rem}div:where(.swal2-container) div:where(.swal2-popup):focus{outline:none}div:where(.swal2-container) div:where(.swal2-popup).swal2-loading{overflow-y:hidden}div:where(.swal2-container) div:where(.swal2-popup).swal2-draggable{cursor:grab}div:where(.swal2-container) div:where(.swal2-popup).swal2-draggable div:where(.swal2-icon){cursor:grab}div:where(.swal2-container) div:where(.swal2-popup).swal2-dragging{cursor:grabbing}div:where(.swal2-container) div:where(.swal2-popup).swal2-dragging div:where(.swal2-icon){cursor:grabbing}div:where(.swal2-container) h2:where(.swal2-title){position:relative;max-width:100%;margin:0;padding:.8em 1em 0;color:inherit;font-size:1.875em;font-weight:600;text-align:center;text-transform:none;word-wrap:break-word;cursor:initial}div:where(.swal2-container) div:where(.swal2-actions){display:flex;z-index:1;box-sizing:border-box;flex-wrap:wrap;align-items:center;justify-content:center;width:auto;margin:1.25em auto 0;padding:0}div:where(.swal2-container) div:where(.swal2-actions):not(.swal2-loading) .swal2-styled[disabled]{opacity:.4}div:where(.swal2-container) div:where(.swal2-actions):not(.swal2-loading) .swal2-styled:hover{background-image:linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1))}div:where(.swal2-container) div:where(.swal2-actions):not(.swal2-loading) .swal2-styled:active{background-image:linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2))}div:where(.swal2-container) div:where(.swal2-loader){display:none;align-items:center;justify-content:center;width:2.2em;height:2.2em;margin:0 1.875em;animation:swal2-rotate-loading 1.5s linear 0s infinite normal;border-width:.25em;border-style:solid;border-radius:100%;border-color:#2778c4 rgba(0,0,0,0) #2778c4 rgba(0,0,0,0)}div:where(.swal2-container) button:where(.swal2-styled){margin:.3125em;padding:.625em 1.1em;transition:box-shadow .1s;box-shadow:0 0 0 3px rgba(0,0,0,0);font-weight:500}div:where(.swal2-container) button:where(.swal2-styled):not([disabled]){cursor:pointer}div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-confirm){border:0;border-radius:.25em;background:initial;background-color:#7066e0;color:#fff;font-size:1em}div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-confirm):focus-visible{box-shadow:0 0 0 3px rgba(112,102,224,.5)}div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-deny){border:0;border-radius:.25em;background:initial;background-color:#dc3741;color:#fff;font-size:1em}div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-deny):focus-visible{box-shadow:0 0 0 3px rgba(220,55,65,.5)}div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-cancel){border:0;border-radius:.25em;background:initial;background-color:#6e7881;color:#fff;font-size:1em}div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-cancel):focus-visible{box-shadow:0 0 0 3px rgba(110,120,129,.5)}div:where(.swal2-container) button:where(.swal2-styled).swal2-default-outline:focus-visible{box-shadow:0 0 0 3px rgba(100,150,200,.5)}div:where(.swal2-container) button:where(.swal2-styled):focus-visible{outline:none}div:where(.swal2-container) button:where(.swal2-styled)::-moz-focus-inner{border:0}div:where(.swal2-container) div:where(.swal2-footer){margin:1em 0 0;padding:1em 1em 0;border-top:1px solid var(--swal2-footer-border-color);color:inherit;font-size:1em;text-align:center;cursor:initial}div:where(.swal2-container) .swal2-timer-progress-bar-container{position:absolute;right:0;bottom:0;left:0;grid-column:auto !important;overflow:hidden;border-bottom-right-radius:var(--swal2-border-radius);border-bottom-left-radius:var(--swal2-border-radius)}div:where(.swal2-container) div:where(.swal2-timer-progress-bar){width:100%;height:.25em;background:rgba(0,0,0,.2)}div:where(.swal2-container) img:where(.swal2-image){max-width:100%;margin:2em auto 1em;cursor:initial}div:where(.swal2-container) button:where(.swal2-close){position:var(--swal2-close-button-position);inset:var(--swal2-close-button-inset);z-index:2;align-items:center;justify-content:center;width:1.2em;height:1.2em;margin-top:0;margin-right:0;margin-bottom:-1.2em;padding:0;overflow:hidden;transition:color .1s,box-shadow .1s;border:none;border-radius:var(--swal2-border-radius);background:rgba(0,0,0,0);color:var(--swal2-close-button-color);font-family:monospace;font-size:var(--swal2-close-button-font-size);cursor:pointer;justify-self:end}div:where(.swal2-container) button:where(.swal2-close):hover{transform:none;background:rgba(0,0,0,0);color:#f27474}div:where(.swal2-container) button:where(.swal2-close):focus-visible{outline:none;box-shadow:inset 0 0 0 3px rgba(100,150,200,.5)}div:where(.swal2-container) button:where(.swal2-close)::-moz-focus-inner{border:0}div:where(.swal2-container) div:where(.swal2-html-container){z-index:1;justify-content:center;margin:0;padding:1em 1.6em .3em;overflow:auto;color:inherit;font-size:1.125em;font-weight:normal;line-height:normal;text-align:center;word-wrap:break-word;word-break:break-word;cursor:initial}div:where(.swal2-container) input:where(.swal2-input),div:where(.swal2-container) input:where(.swal2-file),div:where(.swal2-container) textarea:where(.swal2-textarea),div:where(.swal2-container) select:where(.swal2-select),div:where(.swal2-container) div:where(.swal2-radio),div:where(.swal2-container) label:where(.swal2-checkbox){margin:1em 2em 3px}div:where(.swal2-container) input:where(.swal2-input),div:where(.swal2-container) input:where(.swal2-file),div:where(.swal2-container) textarea:where(.swal2-textarea){box-sizing:border-box;width:auto;transition:border-color .1s,box-shadow .1s;border:1px solid #d9d9d9;border-radius:.1875em;background:var(--swal2-input-background);box-shadow:inset 0 1px 1px rgba(0,0,0,.06),0 0 0 3px rgba(0,0,0,0);color:inherit;font-size:1.125em}div:where(.swal2-container) input:where(.swal2-input).swal2-inputerror,div:where(.swal2-container) input:where(.swal2-file).swal2-inputerror,div:where(.swal2-container) textarea:where(.swal2-textarea).swal2-inputerror{border-color:#f27474 !important;box-shadow:0 0 2px #f27474 !important}div:where(.swal2-container) input:where(.swal2-input):focus,div:where(.swal2-container) input:where(.swal2-file):focus,div:where(.swal2-container) textarea:where(.swal2-textarea):focus{border:1px solid #b4dbed;outline:none;box-shadow:inset 0 1px 1px rgba(0,0,0,.06),0 0 0 3px rgba(100,150,200,.5)}div:where(.swal2-container) input:where(.swal2-input)::placeholder,div:where(.swal2-container) input:where(.swal2-file)::placeholder,div:where(.swal2-container) textarea:where(.swal2-textarea)::placeholder{color:#ccc}div:where(.swal2-container) .swal2-range{margin:1em 2em 3px;background:var(--swal2-background)}div:where(.swal2-container) .swal2-range input{width:80%}div:where(.swal2-container) .swal2-range output{width:20%;color:inherit;font-weight:600;text-align:center}div:where(.swal2-container) .swal2-range input,div:where(.swal2-container) .swal2-range output{height:2.625em;padding:0;font-size:1.125em;line-height:2.625em}div:where(.swal2-container) .swal2-input{height:2.625em;padding:0 .75em}div:where(.swal2-container) .swal2-file{width:75%;margin-right:auto;margin-left:auto;background:var(--swal2-input-background);font-size:1.125em}div:where(.swal2-container) .swal2-textarea{height:6.75em;padding:.75em}div:where(.swal2-container) .swal2-select{min-width:50%;max-width:100%;padding:.375em .625em;background:var(--swal2-input-background);color:inherit;font-size:1.125em}div:where(.swal2-container) .swal2-radio,div:where(.swal2-container) .swal2-checkbox{align-items:center;justify-content:center;background:var(--swal2-background);color:inherit}div:where(.swal2-container) .swal2-radio label,div:where(.swal2-container) .swal2-checkbox label{margin:0 .6em;font-size:1.125em}div:where(.swal2-container) .swal2-radio input,div:where(.swal2-container) .swal2-checkbox input{flex-shrink:0;margin:0 .4em}div:where(.swal2-container) label:where(.swal2-input-label){display:flex;justify-content:center;margin:1em auto 0}div:where(.swal2-container) div:where(.swal2-validation-message){align-items:center;justify-content:center;margin:1em 0 0;padding:.625em;overflow:hidden;background:var(--swal2-validation-message-background);color:var(--swal2-validation-message-color);font-size:1em;font-weight:300}div:where(.swal2-container) div:where(.swal2-validation-message)::before{content:"!";display:inline-block;width:1.5em;min-width:1.5em;height:1.5em;margin:0 .625em;border-radius:50%;background-color:#f27474;color:#fff;font-weight:600;line-height:1.5em;text-align:center}div:where(.swal2-container) .swal2-progress-steps{flex-wrap:wrap;align-items:center;max-width:100%;margin:1.25em auto;padding:0;background:rgba(0,0,0,0);font-weight:600}div:where(.swal2-container) .swal2-progress-steps li{display:inline-block;position:relative}div:where(.swal2-container) .swal2-progress-steps .swal2-progress-step{z-index:20;flex-shrink:0;width:2em;height:2em;border-radius:2em;background:#2778c4;color:#fff;line-height:2em;text-align:center}div:where(.swal2-container) .swal2-progress-steps .swal2-progress-step.swal2-active-progress-step{background:#2778c4}div:where(.swal2-container) .swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step{background:var(--swal2-progress-step-background);color:#fff}div:where(.swal2-container) .swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step-line{background:var(--swal2-progress-step-background)}div:where(.swal2-container) .swal2-progress-steps .swal2-progress-step-line{z-index:10;flex-shrink:0;width:2.5em;height:.4em;margin:0 -1px;background:#2778c4}div:where(.swal2-icon){position:relative;box-sizing:content-box;justify-content:center;width:5em;height:5em;margin:2.5em auto .6em;border:.25em solid rgba(0,0,0,0);border-radius:50%;border-color:#000;font-family:inherit;line-height:5em;cursor:default;user-select:none}div:where(.swal2-icon) .swal2-icon-content{display:flex;align-items:center;font-size:3.75em}div:where(.swal2-icon).swal2-error{border-color:#f27474;color:#f27474}div:where(.swal2-icon).swal2-error .swal2-x-mark{position:relative;flex-grow:1}div:where(.swal2-icon).swal2-error [class^=swal2-x-mark-line]{display:block;position:absolute;top:2.3125em;width:2.9375em;height:.3125em;border-radius:.125em;background-color:#f27474}div:where(.swal2-icon).swal2-error [class^=swal2-x-mark-line][class$=left]{left:1.0625em;transform:rotate(45deg)}div:where(.swal2-icon).swal2-error [class^=swal2-x-mark-line][class$=right]{right:1em;transform:rotate(-45deg)}div:where(.swal2-icon).swal2-error.swal2-icon-show{animation:swal2-animate-error-icon .5s}div:where(.swal2-icon).swal2-error.swal2-icon-show .swal2-x-mark{animation:swal2-animate-error-x-mark .5s}div:where(.swal2-icon).swal2-warning{border-color:#f8bb86;color:#f8bb86}div:where(.swal2-icon).swal2-warning.swal2-icon-show{animation:swal2-animate-error-icon .5s}div:where(.swal2-icon).swal2-warning.swal2-icon-show .swal2-icon-content{animation:swal2-animate-i-mark .5s}div:where(.swal2-icon).swal2-info{border-color:#3fc3ee;color:#3fc3ee}div:where(.swal2-icon).swal2-info.swal2-icon-show{animation:swal2-animate-error-icon .5s}div:where(.swal2-icon).swal2-info.swal2-icon-show .swal2-icon-content{animation:swal2-animate-i-mark .8s}div:where(.swal2-icon).swal2-question{border-color:#87adbd;color:#87adbd}div:where(.swal2-icon).swal2-question.swal2-icon-show{animation:swal2-animate-error-icon .5s}div:where(.swal2-icon).swal2-question.swal2-icon-show .swal2-icon-content{animation:swal2-animate-question-mark .8s}div:where(.swal2-icon).swal2-success{border-color:#a5dc86;color:#a5dc86}div:where(.swal2-icon).swal2-success [class^=swal2-success-circular-line]{position:absolute;width:3.75em;height:7.5em;border-radius:50%}div:where(.swal2-icon).swal2-success [class^=swal2-success-circular-line][class$=left]{top:-0.4375em;left:-2.0635em;transform:rotate(-45deg);transform-origin:3.75em 3.75em;border-radius:7.5em 0 0 7.5em}div:where(.swal2-icon).swal2-success [class^=swal2-success-circular-line][class$=right]{top:-0.6875em;left:1.875em;transform:rotate(-45deg);transform-origin:0 3.75em;border-radius:0 7.5em 7.5em 0}div:where(.swal2-icon).swal2-success .swal2-success-ring{position:absolute;z-index:2;top:-0.25em;left:-0.25em;box-sizing:content-box;width:100%;height:100%;border:.25em solid rgba(165,220,134,.3);border-radius:50%}div:where(.swal2-icon).swal2-success .swal2-success-fix{position:absolute;z-index:1;top:.5em;left:1.625em;width:.4375em;height:5.625em;transform:rotate(-45deg)}div:where(.swal2-icon).swal2-success [class^=swal2-success-line]{display:block;position:absolute;z-index:2;height:.3125em;border-radius:.125em;background-color:#a5dc86}div:where(.swal2-icon).swal2-success [class^=swal2-success-line][class$=tip]{top:2.875em;left:.8125em;width:1.5625em;transform:rotate(45deg)}div:where(.swal2-icon).swal2-success [class^=swal2-success-line][class$=long]{top:2.375em;right:.5em;width:2.9375em;transform:rotate(-45deg)}div:where(.swal2-icon).swal2-success.swal2-icon-show .swal2-success-line-tip{animation:swal2-animate-success-line-tip .75s}div:where(.swal2-icon).swal2-success.swal2-icon-show .swal2-success-line-long{animation:swal2-animate-success-line-long .75s}div:where(.swal2-icon).swal2-success.swal2-icon-show .swal2-success-circular-line-right{animation:swal2-rotate-success-circular-line 4.25s ease-in}[class^=swal2]{-webkit-tap-highlight-color:rgba(0,0,0,0)}.swal2-show{animation:var(--swal2-show-animation)}.swal2-hide{animation:var(--swal2-hide-animation)}.swal2-noanimation{transition:none}.swal2-scrollbar-measure{position:absolute;top:-9999px;width:50px;height:50px;overflow:scroll}.swal2-rtl .swal2-close{margin-right:initial;margin-left:0}.swal2-rtl .swal2-timer-progress-bar{right:0;left:auto}.swal2-toast{box-sizing:border-box;grid-column:1/4 !important;grid-row:1/4 !important;grid-template-columns:min-content auto min-content;padding:1em;overflow-y:hidden;background:var(--swal2-background);box-shadow:0 0 1px rgba(0,0,0,.075),0 1px 2px rgba(0,0,0,.075),1px 2px 4px rgba(0,0,0,.075),1px 3px 8px rgba(0,0,0,.075),2px 4px 16px rgba(0,0,0,.075);pointer-events:all}.swal2-toast>*{grid-column:2}.swal2-toast h2:where(.swal2-title){margin:.5em 1em;padding:0;font-size:1em;text-align:initial}.swal2-toast .swal2-loading{justify-content:center}.swal2-toast input:where(.swal2-input){height:2em;margin:.5em;font-size:1em}.swal2-toast .swal2-validation-message{font-size:1em}.swal2-toast div:where(.swal2-footer){margin:.5em 0 0;padding:.5em 0 0;font-size:.8em}.swal2-toast button:where(.swal2-close){grid-column:3/3;grid-row:1/99;align-self:center;width:.8em;height:.8em;margin:0;font-size:2em}.swal2-toast div:where(.swal2-html-container){margin:.5em 1em;padding:0;overflow:initial;font-size:1em;text-align:initial}.swal2-toast div:where(.swal2-html-container):empty{padding:0}.swal2-toast .swal2-loader{grid-column:1;grid-row:1/99;align-self:center;width:2em;height:2em;margin:.25em}.swal2-toast .swal2-icon{grid-column:1;grid-row:1/99;align-self:center;width:2em;min-width:2em;height:2em;margin:0 .5em 0 0}.swal2-toast .swal2-icon .swal2-icon-content{display:flex;align-items:center;font-size:1.8em;font-weight:bold}.swal2-toast .swal2-icon.swal2-success .swal2-success-ring{width:2em;height:2em}.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line]{top:.875em;width:1.375em}.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{left:.3125em}.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{right:.3125em}.swal2-toast div:where(.swal2-actions){justify-content:flex-start;height:auto;margin:0;margin-top:.5em;padding:0 .5em}.swal2-toast button:where(.swal2-styled){margin:.25em .5em;padding:.4em .6em;font-size:1em}.swal2-toast .swal2-success{border-color:#a5dc86}.swal2-toast .swal2-success [class^=swal2-success-circular-line]{position:absolute;width:1.6em;height:3em;border-radius:50%}.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=left]{top:-0.8em;left:-0.5em;transform:rotate(-45deg);transform-origin:2em 2em;border-radius:4em 0 0 4em}.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=right]{top:-0.25em;left:.9375em;transform-origin:0 1.5em;border-radius:0 4em 4em 0}.swal2-toast .swal2-success .swal2-success-ring{width:2em;height:2em}.swal2-toast .swal2-success .swal2-success-fix{top:0;left:.4375em;width:.4375em;height:2.6875em}.swal2-toast .swal2-success [class^=swal2-success-line]{height:.3125em}.swal2-toast .swal2-success [class^=swal2-success-line][class$=tip]{top:1.125em;left:.1875em;width:.75em}.swal2-toast .swal2-success [class^=swal2-success-line][class$=long]{top:.9375em;right:.1875em;width:1.375em}.swal2-toast .swal2-success.swal2-icon-show .swal2-success-line-tip{animation:swal2-toast-animate-success-line-tip .75s}.swal2-toast .swal2-success.swal2-icon-show .swal2-success-line-long{animation:swal2-toast-animate-success-line-long .75s}.swal2-toast.swal2-show{animation:swal2-toast-show .5s}.swal2-toast.swal2-hide{animation:swal2-toast-hide .1s forwards}@keyframes swal2-show{0%{transform:scale(0.7)}45%{transform:scale(1.05)}80%{transform:scale(0.95)}100%{transform:scale(1)}}@keyframes swal2-hide{0%{transform:scale(1);opacity:1}100%{transform:scale(0.5);opacity:0}}@keyframes swal2-animate-success-line-tip{0%{top:1.1875em;left:.0625em;width:0}54%{top:1.0625em;left:.125em;width:0}70%{top:2.1875em;left:-0.375em;width:3.125em}84%{top:3em;left:1.3125em;width:1.0625em}100%{top:2.8125em;left:.8125em;width:1.5625em}}@keyframes swal2-animate-success-line-long{0%{top:3.375em;right:2.875em;width:0}65%{top:3.375em;right:2.875em;width:0}84%{top:2.1875em;right:0;width:3.4375em}100%{top:2.375em;right:.5em;width:2.9375em}}@keyframes swal2-rotate-success-circular-line{0%{transform:rotate(-45deg)}5%{transform:rotate(-45deg)}12%{transform:rotate(-405deg)}100%{transform:rotate(-405deg)}}@keyframes swal2-animate-error-x-mark{0%{margin-top:1.625em;transform:scale(0.4);opacity:0}50%{margin-top:1.625em;transform:scale(0.4);opacity:0}80%{margin-top:-0.375em;transform:scale(1.15)}100%{margin-top:0;transform:scale(1);opacity:1}}@keyframes swal2-animate-error-icon{0%{transform:rotateX(100deg);opacity:0}100%{transform:rotateX(0deg);opacity:1}}@keyframes swal2-rotate-loading{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}@keyframes swal2-animate-question-mark{0%{transform:rotateY(-360deg)}100%{transform:rotateY(0)}}@keyframes swal2-animate-i-mark{0%{transform:rotateZ(45deg);opacity:0}25%{transform:rotateZ(-25deg);opacity:.4}50%{transform:rotateZ(15deg);opacity:.8}75%{transform:rotateZ(-5deg);opacity:1}100%{transform:rotateX(0);opacity:1}}@keyframes swal2-toast-show{0%{transform:translateY(-0.625em) rotateZ(2deg)}33%{transform:translateY(0) rotateZ(-2deg)}66%{transform:translateY(0.3125em) rotateZ(2deg)}100%{transform:translateY(0) rotateZ(0deg)}}@keyframes swal2-toast-hide{100%{transform:rotateZ(1deg);opacity:0}}@keyframes swal2-toast-animate-success-line-tip{0%{top:.5625em;left:.0625em;width:0}54%{top:.125em;left:.125em;width:0}70%{top:.625em;left:-0.25em;width:1.625em}84%{top:1.0625em;left:.75em;width:.5em}100%{top:1.125em;left:.1875em;width:.75em}}@keyframes swal2-toast-animate-success-line-long{0%{top:1.625em;right:1.375em;width:0}65%{top:1.25em;right:.9375em;width:0}84%{top:.9375em;right:0;width:1.125em}100%{top:.9375em;right:.1875em;width:1.375em}}</style><style id="canny-changeloge-style" type="text/css">.Canny_BadgeContainer { position: absolute; top: 0; bottom: 0; left: 0; right: 0; visibility: hidden } .Canny_Badge { position: absolute; top: -1px; right: -1px; border-radius: 10px; background-color: red; padding: 5px; border: 1px solid white; visibility: visible } @keyframes canny-widget-slide-up { from { opacity:0.6; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }</style></head>
+
+<body class="overflow-hidden" style="overflow: visible;">
+    
+
+    <nav class="fixed z-30 w-full bg-[#0f0f17] border-[#09090d]">
+    <div class="py-3 px-3 lg:px-5 lg:pl-3">
+        <div class="flex justify-between items-center">
+            <div class="flex justify-start items-center">
+                <div class="hidden p-2 text-white rounded cursor-pointer lg:inline hover:opacity-60 transition duration-200 -ml-8">
+                    <div class="w-6 h-6">
+                    </div>
+                </div>
+
+                <button type="button" id="toggleSidebarMobile" aria-expanded="true" aria-controls="sidebar" class="p-2 mr-2 text-white rounded cursor-pointer lg:hidden hover:opacity-60 focus:ring-0">
+                    <svg id="toggleSidebarMobileHamburger" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                    </svg>
+                    <svg id="toggleSidebarMobileClose" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+
+                <a href="https://keyauth.win/app/?page=manage-apps">
+                    <img src="KeyauthBanner.png" alt="KeyAuth Icon" style="max-width: 100px; height: auto;">
+                </a>
+            </div>
+
+            <div class="hidden md:block">
+                <a href="https://keyauthdocs.apidog.io/" target="_blank" type="button" class="inline-flex text-white bg-[#0f0f17] hover:opacity-60 hover:text-blue-700 focus:ring-0 font-medium rounded-lg text-sm px-5 py-2.5 mb-1 transition duration-200 pt-3" style="margin-left: 150px;">
+                    <i class="ri-code-s-slash-line mr-2"></i>Documentation
+                </a>
+
+                <a href="https://github.com/keyauth" target="_blank" type="button" class="inline-flex text-white bg-[#0f0f17] hover:opacity-60 hover:text-blue-700 focus:ring-0 font-medium rounded-lg text-sm px-5 py-2.5 mb-1 transition duration-200 pt-3" style="margin-left: 75;">
+                    <i class="ri-github-fill mr-2"></i>Examples
+                </a>
+
+                <a href="https://youtube.com/keyauth" target="_blank" type="button" class="inline-flex text-white bg-[#0f0f17] hover:opacity-60 hover:text-blue-700 focus:ring-0 font-medium rounded-lg text-sm px-5 py-2.5 mb-1 transition duration-200 pt-3" style="margin-left: 75;">
+                    <i class="ri-youtube-line mr-2"></i>YouTube
+                </a>
+
+                <a href="https://t.me/keyauth" target="_blank" type="button" class="inline-flex text-white bg-[#0f0f17] hover:opacity-60 hover:text-blue-700 focus:ring-0 font-medium rounded-lg text-sm px-5 py-2.5 mb-1 transition duration-200 pt-3" style="margin-left: 75;">
+                    <i class="ri-telegram-2-line mr-2"></i>Telegram
+                </a>
+
+                <a href="https://twitter.com/keyauth" target="_blank" type="button" class="inline-flex text-white bg-[#0f0f17] hover:opacity-60 hover:text-blue-700 focus:ring-0 font-medium rounded-lg text-sm px-5 py-2.5 mb-1 transition duration-200 pt-3" style="margin-left: 75;">
+                    <i class="ri-twitter-x-line mr-2"></i>Twitter
+                </a>
+
+                <a href="https://instagram.com/keyauthllc" target="_blank" type="button" class="inline-flex text-white bg-[#0f0f17] hover:opacity-60 hover:text-blue-700 focus:ring-0 font-medium rounded-lg text-sm px-5 py-2.5 mb-1 transition duration-200 pt-3" style="margin-left: 75;">
+                    <i class="ri-instagram-line mr-2"></i>Instagram
+                </a>
+
+                <a href="https://tiktok.com/@keyauth" target="_blank" type="button" class="inline-flex text-white bg-[#0f0f17] hover:opacity-60 hover:text-blue-700 focus:ring-0 font-medium rounded-lg text-sm px-5 py-2.5 mb-1 transition duration-200 pt-3" style="margin-left: 75;">
+                    <i class="ri-tiktok-fill mr-2"></i>TikTok
+                </a>
+            </div>
+
+            <div id="dropdownDotsHorizontal" class="z-10 hidden bg-[#09090d] divide-y-2 divide-[#1c64f2] border-2 border-[#1c64f2] rounded-lg shadow w-44" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 10px);" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="bottom">
+                <ul class="py-2 text-white text-xs" aria-labelledby="dropdownMenuIconHorizontalButton">
+                    <li class="">
+                        <a href="https://keyauthdocs.apidog.io/" target="_blank" class="block px-4 py-2 hover:opacity-60 inline-flex">
+                            <i class="ri-code-s-slash-line mr-2"></i>Documentation
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/keyauth" target="_blank" class="block px-4 py-2 hover:opacity-60 inline-flex">
+                            <i class="ri-github-fill mr-2"></i>Examples
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://youtube.com/keyauth" target="_blank" class="block px-4 py-2 hover:opacity-60 inline-flex">
+                            <i class="ri-youtube-line mr-2"></i>YouTube
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://t.me/keyauth" target="_blank" class="block px-4 py-2 hover:opacity-60 inline-flex">
+                            <i class="ri-telegram-2-line mr-2"></i>Telegram
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/keyauth" target="_blank" class="block px-4 py-2 hover:opacity-60 inline-flex">
+                            <i class="ri-twitter-x-line mr-2"></i>Twitter
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://instagram.com/keyauthllc" target="_blank" class="block px-4 py-2 hover:opacity-60 inline-flex">
+                            <i class="ri-instagram-line mr-2"></i>Instagram
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Search Bar 
+            <form class="max-w-md mx-auto">
+                <div class="relative">
+                    <div class="relative z-0 w-full">
+                        <input type="search" oninput="showSuggestions()" id="default-search" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Search..." />
+                    </div>
+
+                    
+                    <ul id="suggestions-list" class="absolute w-full mt-1 bg-[#09090d] rounded-lg shadow-lg hidden">
+ 
+                    </ul>
+                </div>
+            </form>
+            -->
+
+            <div class="ml-auto flex items-center">
+                <a type="button" data-canny-changelog="true" style="margin-right: 5px; cursor: pointer; position: relative;" class="mb-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 576 512" class="text-white" fill="currentColor">
+                        <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                        <path d="M224 0c-17.7 0-32 14.3-32 32V51.2C119 66 64 130.6 64 208v18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416H416c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8V208c0-77.4-55-142-128-156.8V32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z"></path>
+                    </svg>
+                <div class="Canny_BadgeContainer"><div class="Canny_Badge"></div></div></a>
+
+                <a class="block md:hidden" type="button" id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal" style="cursor: pointer;">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.465 11.293c1.133-1.133 3.109-1.133 4.242 0l.707.707 1.414-1.414-.707-.707a4.965 4.965 0 0 0-3.535-1.465A4.965 4.965 0 0 0 7.05 9.88L4.929 12a5.008 5.008 0 0 0 0 7.071 4.984 4.984 0 0 0 3.535 1.462A4.984 4.984 0 0 0 12 19.071l.707-.707-1.414-1.414-.707.707a3.007 3.007 0 0 1-4.243 0 3.005 3.005 0 0 1 0-4.243l2.122-2.12Z">
+                        </path>
+                        <path d="m12 4.93-.707.708 1.414 1.414.707-.707a3.007 3.007 0 0 1 4.243 0 3.005 3.005 0 0 1 0 4.243l-2.122 2.12c-1.133 1.134-3.11 1.134-4.242 0l-.707-.706-1.414 1.414.707.707a4.965 4.965 0 0 0 3.535 1.465 4.965 4.965 0 0 0 3.535-1.465l2.122-2.121a5.008 5.008 0 0 0 0-7.071 5.006 5.006 0 0 0-7.071 0Z">
+                        </path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="flex overflow-hidden pt-16 bg-[#09090d]">
+    
+    
+<style>
+/* Hide vertical scrollbar for Webkit-based browsers (e.g., Chrome, Safari) */
+*::-webkit-scrollbar {
+    display: none;
+}
+</style>
+
+<aside id="sidebar" class="flex hidden fixed top-0 left-0 z-20 flex-col flex-shrink-0 pt-16 w-64 h-full duration-200 lg:flex transition-width" aria-label="Sidebar">
+    <div class="flex relative flex-col flex-1 pt-0 min-h-0 bg-[#0f0f17] border-r border-[#0f0f17]">
+        <div class="flex overflow-y-auto flex-col flex-1 pt-5 pb-4">
+            <div class="flex-1 px-3 space-y-1 bg-[#0f0f17] mt-8">
+                
+<div class="w-full max-w-sm border border-gray-700 rounded-lg shadow">
+    <div class="flex justify-end px-4 pt-2">
+        <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500 hover:opacity-60 focus:ring-0 p-1.5" type="button">
+            <span class="sr-only">Open dropdown</span>
+            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"></path>
+            </svg>
+        </button>
+        <!-- Dropdown menu -->
+        <form method="post">
+            <div id="dropdown" class="z-10 hidden text-base list-none bg-[#09090d] rounded-lg shadow w-44" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(210px, 167px);" data-popper-placement="bottom">
+                <ul class="py-2" aria-labelledby="dropdownButton">
+                    <li>
+                        <a href="https://keyauth.win/app/?page=account-settings" class="block px-4 py-2 text-sm text-white hover:bg-blue-700">Account Settings</a>
+                    </li>
+                    <li>
+                        <a href="https://keyauth.win/app/?page=account-logs" class="block px-4 py-2 text-sm text-white hover:bg-blue-700">Account Logs</a>
+                    </li>
+                    <li>
+                        <a href="https://keyauth.win/app/?page=logout" class="block px-4 py-2 text-sm text-white hover:bg-blue-700">Log Out</a>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
+
+    <div class="flex items-center px-4 pb-4 ml-6">
+        <img class="w-12 h-12 rounded-full mr-3" src="favicon-1.png" alt="profile image">
+
+        <div class="ml-4 flex flex-col mr-4">
+                            <h5 class="text-lg font-medium text-blue-700 ml-5">notwellnes</h5>
+            
+            <label class="text-sm text-gray-400"><b>Expires:</b> Never </label>        </div>
+    </div>
+
+    <div class="px-4 pb-4">
+        <p class="text-center text-transparent bg-clip-text bg-gradient-to-r to-blue-600 from-sky-400 text-xs font-black px-1.5 py-0.5 rounded border mb-2">TESTER PLAN</p>    </div>
+</div>
+<br>
+                <div class="mb-4 border-b border-[#0f0f17]">
+                    <ul class="grid grid-cols-3 -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">                  
+                                                <li class="mr-2" role="presentation">
+                            <button class="inline-block p-4 rounded-t-lg hover:opacity-60 text-blue-600 hover:text-blue-600 dark:text-blue-500 dark:hover:text-blue-500 border-blue-600 dark:border-blue-500" id="app-tab" data-tabs-target="#app" type="button" role="tab" aria-controls="app" data-tbt="app" aria-selected="true" data-popover-target="app-popover">App</button>
+                                <div data-popover="" id="app-popover" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-[#09090d] rounded-lg shadow-sm opacity-0" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(0px, -659px);" data-popper-placement="top">
+            <div class="px-3 py-2 bg-[#09090d]/70 rounded-t-lg">
+                <h3 class="font-semibold text-white">Application</h3>
+            </div>
+            <div class="px-3 py-2">
+                <p>Find everything related to your application here</p>
+            </div>
+            <div data-popper-arrow="" style="position: absolute; left: 0px; transform: translate(41px, 0px);"></div>
+        </div>                        </li>
+                                                                        <li class="mr-2" role="presentation">
+                            <button class="inline-block p-4 rounded-t-lg hover:opacity-60 dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300" id="account-tab" data-tabs-target="#account" type="button" role="tab" data-tbt="account" aria-controls="account" aria-selected="false" data-popover-target="account-popover">Account</button>
+                                <div data-popover="" id="account-popover" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-[#09090d] rounded-lg shadow-sm opacity-0" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(0px, -659px);" data-popper-placement="top">
+            <div class="px-3 py-2 bg-[#09090d]/70 rounded-t-lg">
+                <h3 class="font-semibold text-white">Account</h3>
+            </div>
+            <div class="px-3 py-2">
+                <p>Find everything related to your Account here.</p>
+            </div>
+            <div data-popper-arrow="" style="position: absolute; left: 0px; transform: translate(123px, 0px);"></div>
+        </div>                        </li>
+                    </ul>
+                </div>
+                <div id="myTabContent">
+                    <div class="p-4 rounded-lg" id="app" role="tabpanel" aria-labelledby="app-tab">
+                        <ul class="space-y-2 font-medium">
+                                                        <li>
+                                <a href="" class="flex items-center p-2 rounded-lg text-gray-300 hover:opacity-60 hover:bg-blue-700 group">
+                                    <i class="ri-key-2-fill"></i>
+                                    <span class="ml-3">Licenses</span>
+                                </a>
+                            </li>
+                            
+                                                        <li>
+                                <a href="https://keyauth.win/app/?page=users" class="flex items-center p-2 rounded-lg text-gray-300 hover:opacity-60 hover:bg-blue-700 group">
+                                    <i class="ri-group-line"></i>
+                                    <span class="ml-3">Users</span>
+                                </a>
+                            </li>
+                            
+                                                        <li>
+                                <a href="https://keyauth.win/app/?page=tokens" class="flex items-center p-2 rounded-lg text-gray-300 hover:opacity-60 hover:bg-blue-700 group">
+                                    <i class="ri-price-tag-3-fill"></i>
+                                    <span class="ml-3">Tokens</span>
+                                </a>
+                            </li>
+                            
+                                                        <li>
+                                <a href="https://keyauth.win/app/?page=subscriptions" class="flex items-center p-2 rounded-lg text-gray-300 hover:opacity-60 hover:bg-blue-700 group">
+                                    <i class="ri-vip-crown-line"></i>
+                                    <span class="ml-3">Subscriptions</span>
+                                </a>
+                            </li>
+                            
+                                                        <li>
+                                <a href="https://keyauth.win/app/?page=chats" class="flex items-center p-2 rounded-lg text-gray-300 hover:opacity-60 hover:bg-blue-700 group">
+                                    <i class="ri-chat-4-line"></i>
+                                    <span class="ml-3">Chats</span>
+                                </a>
+                            </li>
+                            
+                                                        <li>
+                                <a href="https://keyauth.win/app/?page=sessions" class="flex items-center p-2 rounded-lg text-gray-300 hover:opacity-60 hover:bg-blue-700 group">
+                                    <i class="ri-time-line"></i>
+                                    <span class="ml-3">Sessions</span>
+                                </a>
+                            </li>
+                            
+                                                        <li>
+                                <a href="https://keyauth.win/app/?page=webhooks" class="flex items-center p-2 rounded-lg text-gray-300 hover:opacity-60 hover:bg-blue-700 group">
+                                    <i class="ri-webhook-line"></i>
+                                    <span class="ml-3">Webhooks</span>
+                                </a>
+                            </li>
+                            
+                                                        <li>
+                                <a href="https://keyauth.win/app/?page=files" class="flex items-center p-2 rounded-lg text-gray-300 hover:opacity-60 hover:bg-blue-700 group">
+                                    <i class="ri-file-download-line"></i>
+                                    <span class="ml-3">Files</span>
+                                </a>
+                            </li>
+                            
+                                                        <li>
+                                <a href="https://keyauth.win/app/?page=vars" class="flex items-center p-2 rounded-lg text-gray-300 hover:opacity-60 hover:bg-blue-700 group">
+                                    <i class="ri-information-line"></i>
+                                    <span class="ml-3">Variables</span>
+                                </a>
+                            </li>
+                            
+                                                        <li>
+                                <a href="https://keyauth.win/app/?page=logs" class="flex items-center p-2 rounded-lg text-gray-300 hover:opacity-60 hover:bg-blue-700 group">
+                                    <i class="ri-database-2-line"></i>
+                                    <span class="ml-3">Logs</span>
+                                </a>
+                            </li>
+                            
+                                                        <li>
+                                <a href="https://keyauth.win/app/?page=blacklists" class="flex items-center p-2 rounded-lg text-gray-300 hover:opacity-60 hover:bg-blue-700 group">
+                                    <i class="ri-prohibited-2-line"></i>
+                                    <span class="ml-3">Blacklists</span>
+                                </a>
+                            </li>
+                            
+                                                        <li>
+                                <a href="https://keyauth.win/app/?page=whitelists" class="flex items-center p-2 rounded-lg text-gray-300 hover:opacity-60 hover:bg-blue-700 group">
+                                    <i class="ri-check-line"></i>
+                                    <span class="ml-3">Whitelists</span>
+                                </a>
+                            </li>
+                            
+                                                        <li>
+                                <a href="https://keyauth.win/app/?page=app-settings" class="flex items-center p-2 rounded-lg text-gray-300 hover:opacity-60 hover:bg-blue-700 group">
+                                    <i class="ri-tools-line"></i>
+                                    <span class="ml-3">Settings</span>
+                                </a>
+                            </li>
+                            
+                                                        <li>
+                                <a href="https://keyauth.win/app/?page=audit-logs" class="flex items-center p-2 rounded-lg text-gray-300 hover:opacity-60 hover:bg-blue-700 group">
+                                    <i class="ri-database-2-line"></i>
+                                    <span class="ml-3">Audit Logs</span>
+                                </a>
+                            </li>
+                                                    </ul>
+                    </div>
+                    <div class="hidden p-4 rounded-lg " id="seller" role="tabpanel" aria-labelledby="seller-tab">
+                        <ul class="space-y-2 font-medium">
+                            <li>
+                                <a href="https://keyauth.win/app/?page=seller-settings" class="flex items-center p-2 rounded-lg text-gray-300 hover:opacity-60 hover:bg-blue-700 group">
+                                    <i class="ri-tools-line"></i>
+                                    <span class="ml-3">Settings</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://keyauth.win/app/?page=webloader" class="flex items-center p-2 rounded-lg text-gray-300 hover:opacity-60 hover:bg-blue-700 group">
+                                    <i class="ri-terminal-window-line"></i>
+                                    <span class="ml-3">Web Loader</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://keyauth.win/app/?page=seller-logs" class="flex items-center p-2 rounded-lg text-gray-300 hover:opacity-60 hover:bg-blue-700 group">
+                                    <i class="ri-database-2-line"></i>
+                                    <span class="ml-3">Logs</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="hidden p-4 rounded-lg" id="account" role="tabpanel" aria-labelledby="account-tab">
+                        <ul class="space-y-2 font-medium">
+                                                        <li>
+                                <a href="https://keyauth.win/app/?page=forms" class="flex items-center p-2 rounded-lg text-gray-300 hover:opacity-60 hover:bg-blue-700 group">
+                                    <i class="ri-survey-line"></i>
+                                    <span class="ml-3">Forms</span>
+                                </a>
+                            </li>
+                            
+                            
+                                                        <li>
+                                <a href="https://keyauth.win/app/?page=upgrade" class="flex items-center p-2 rounded-lg text-gray-300 hover:opacity-60 hover:bg-blue-700 group">
+                                    <i class="ri-secure-payment-line"></i>
+                                    <span class="ml-3">Upgrade</span>
+                                </a>
+                            </li>
+                            
+                            <li>
+                                <a href="https://keyauth.win/app/?page=account-settings" class="flex items-center p-2 rounded-lg text-gray-300 hover:opacity-60 hover:bg-blue-700 group">
+                                    <i class="ri-tools-line"></i>
+                                    <span class="ml-3">Settings</span>
+                                </a>
+                            </li>
+
+                            
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</aside>
+    <div class="hidden fixed inset-0 z-10" id="sidebarBackdrop"></div>
+    <div id="main-content" class="overflow-y-auto relative w-full h-full lg:ml-64">
+        <main>
+        
+<div class="p-4 bg-[#09090d] block sm:flex items-center justify-between lg:mt-1.5">
+    <div class="mb-1 w-full bg-[#0f0f17] rounded-xl">
+        <div class="mb-4 p-4">
+            <nav class="flex mb-5" aria-label="Breadcrumb">
+    <ol class="inline-flex items-center space-x-1 md:space-x-2">
+        <li class="inline-flex items-center">
+            <a href="https://keyauth.win/app/?page=manage-apps" class="inline-flex items-center text-sm font-medium text-gray-400 hover:text-white">
+                <svg class="w-3 h-3 mr-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"></path>
+                </svg>
+                Manage Apps
+            </a>
+        </li>
+        <li>
+            <div class="flex items-center">
+                <i class="lni lni-angle-double-right mr-2"></i>
+                <label class="inline-flex items-center text-sm font-medium text-gray-400">Current App:
+                    asd </label>
+            </div>
+        </li>
+                        <i class="lni lni-angle-double-right mr-2"></i>
+                <label class="inline-flex items-center text-sm font-medium text-red-600">
+                    You don't have a subscription!                    <a href="https://keyauth.win/app/?page=upgrade" class="text-blue-600 hover:underline">
+                        &nbsp;Upgrade Now.
+                    </a>
+                </label>
+                </ol>
+</nav>            <h1 lang="" class="text-xl font-semibold text-white-900 sm:text-2xl">Licenses</h1>
+            <p class="text-xs text-gray-500">Licenses allow your users to register on your application.</p>
+            <br>
+
+            <div class="p-4 flex flex-col">
+                <div class="overflow-x-auto">
+                    <form method="POST">
+                        <!-- Key Functions -->
+                        <button type="button" class="inline-flex text-white bg-blue-700 hover:opacity-60 focus:ring-0 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 transition duration-200" data-modal-toggle="create-key-modal" data-modal-target="create-key-modal">
+                            <i class="ri-add-circle-line mr-2"></i>Create Keys
+                        </button>
+
+                        <button type="button" class="inline-flex text-white bg-blue-700 hover:opacity-60 focus:ring-0 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 transition duration-200" data-modal-toggle="add-time-modal" data-modal-target="add-time-modal">
+                            <i class="ri-time-line mr-2"></i>Add Time To Unused Keys
+                        </button>
+                        
+                        <button name="dlkeys" class="inline-flex text-white bg-blue-700 hover:opacity-60 focus:ring-0 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 transition duration-200">
+                            <i class="ri-download-line mr-2"></i>Export Keys
+                        </button>
+                    </form>
+                    <!-- End Key Functions -->
+
+                    <!-- Delete Key Functions -->
+                    <button class="inline-flex text-white bg-red-700 hover:opacity-60 focus:ring-0 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 transition duration-200" data-modal-toggle="delete-all-keys-modal" data-modal-target="delete-all-keys-modal">
+                        <i class="ri-delete-bin-2-line mr-2"></i>Delete All Keys
+                    </button>
+                    <button class="inline-flex text-white bg-red-700 hover:opacity-60 focus:ring-0 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 transition duration-200" data-modal-toggle="delete-all-used-keys-modal" data-modal-target="delete-all-used-keys-modal">
+                        <i class="ri-delete-bin-2-line mr-2"></i>Delete All Used Keys
+                    </button>
+                    <button class="inline-flex text-white bg-red-700 hover:opacity-60 focus:ring-0 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 transition duration-200" data-modal-toggle="delete-all-unused-keys-modal" data-modal-target="delete-all-unused-keys-modal">
+                        <i class="ri-delete-bin-2-line mr-2"></i>Delete All Unused Keys
+                    </button>
+
+                    <button id="dropdownselection" data-dropdown-toggle="licenseSelecteddropdown" class="inline-flex text-white bg-red-700 hover:opacity-60 focus:ring-0 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 transition duration-200 hidden" type="button">
+                        <i class="ri-cursor-line mr-2"></i>Selection Options
+                    </button>
+
+                    <div id="licenseSelecteddropdown" class="z-10 hidden bg-[#09090d] divide-y divide-gray-100 rounded-lg shadow w-44" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 10px);" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="bottom">
+                        <ul class="py-2 text-sm text-white">
+                            <li>
+                                <form method="post">
+                                    <input type="hidden" name="action" value="delete" wfd-id="id0">
+                                    <input type="hidden" id="selected" name="selected" wfd-id="id1" value="">
+                                    <a href="#" class="block px-4 py-2 focus:bold ml-2 hover:text-red-700">Delete selected</a>
+                                </form>
+                            </li>
+                            <li>
+                                <form method="post">
+                                    <input type="hidden" name="action" value="banKeyMulti" wfd-id="id2">
+                                    <input type="hidden" id="selected" name="selected" wfd-id="id3" value="">
+                                    <a href="#" class="block px-4 py-2 focus:bold ml-2 hover:text-red-700">Ban selected</a>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- End Delete Key Functions -->
+
+                    
+                    <!-- Create Key Modal -->
+                    <div id="create-key-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full justify-center items-center flex" aria-modal="true" role="dialog">
+                        <div class="relative w-full max-w-md max-h-full">
+                                                        <!-- Modal content -->
+                            <div class="relative bg-[#0f0f17] rounded-lg border border-[#1d4ed8] shadow">
+                                <div class="px-6 py-6 lg:px-8">
+                                    <h3 class="text-xl font-medium text-white-900">CreaA New Key</h3>
+                                    <hr class="h-px mb-4 mt-4 bg-gray-700 border-0">
+                                    <form class="space-y-6" method="POST">
+                                        <div>
+                                            <div class="relative mb-4">
+                                                <input type="text" inputmode="numeric" min="1" max="100" id="amount" name="amount" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-white bg-transparent rounded-lg border-1 border-gray-700 appearance-none focus:ring-0  peer" placeholder=" " autocomplete="on" value="" required="" data-popover-target="amount-popover" wfd-id="id4">
+                                                <label for="amount" class="absolute text-sm text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#0f0f17] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">License
+                                                    Amount</label>
+
+                                                <div data-popover="" id="amount-popover" role="tooltip" class="absolute z-10 inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-[#09090d] rounded-lg shadow-sm opacity-0 invisible" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(63px, 58px);" data-popper-placement="bottom">
+            <div class="px-3 py-2 bg-[#09090d]/70 rounded-t-lg">
+                <h3 class="font-semibold text-white">License Amount</h3>
+            </div>
+            <div class="px-3 py-2">
+                <p>The amount of licenses you would like to create.</p>
+            </div>
+            <div data-popper-arrow="" style="position: absolute; left: 0px; transform: translate(124px, 0px);"></div>
+        </div>                                            </div>
+
+                                            <div class="relative mb-4">
+                                                <input type="text" maxlength="49" id="mask" name="mask" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-white bg-transparent rounded-lg border-1 border-gray-700 appearance-none focus:ring-0  peer" placeholder="*****-*****-*****-*****" autocomplete="on" value="******-******-******-******-******-******" required="" data-popover-target="mask-popover" wfd-id="id5">
+                                                <label for="mask" class="absolute text-sm text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#0f0f17] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">License
+                                                    Mask</label>
+
+                                                <div data-popover="" id="mask-popover" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-[#09090d] rounded-lg shadow-sm opacity-0" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 10px);" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="bottom">
+            <div class="px-3 py-2 bg-[#09090d]/70 rounded-t-lg">
+                <h3 class="font-semibold text-white">License Mask</h3>
+            </div>
+            <div class="px-3 py-2">
+                <p>The format of the license. You can use * to generate random characters.</p>
+            </div>
+            <div data-popper-arrow="" style="position: absolute; left: 0px; transform: translate(0px, 0px);"></div>
+        </div>                                            </div>
+
+                                            <div class="flex items-center justify-between mb-4">
+                                                <div class="flex items-center">
+                                                    <input id="lowercaseLetters" name="lowercaseLetters" type="checkbox" class="w-4 h-4 text-blue-600 bg-[#0f0f17] border-gray-300 rounded focus:ring-blue-500 focus:ring-2" checked="" data-popover-target="lowercase-popover" wfd-id="id6">
+                                                    <label for="lowercaseLetters" class="ml-2 text-sm font-medium text-white-900">
+                                                        Lowercase Letters</label>
+                                                    <div data-popover="" id="lowercase-popover" role="tooltip" class="absolute z-10 inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-[#09090d] rounded-lg shadow-sm opacity-0 invisible" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(-88px, -384px);" data-popper-placement="top">
+            <div class="px-3 py-2 bg-[#09090d]/70 rounded-t-lg">
+                <h3 class="font-semibold text-white">Lowercase Letters</h3>
+            </div>
+            <div class="px-3 py-2">
+                <p>Include lowercase letters in your license.</p>
+            </div>
+            <div data-popper-arrow="" style="position: absolute; left: 0px; transform: translate(124px, 0px);"></div>
+        </div>                                                </div>
+                                                <div class="flex items-center">
+                                                    <input id="capitalLetters" name="capitalLetters" type="checkbox" class="w-4 h-4 text-blue-600 bg-[#0f0f17] border-gray-300 rounded focus:ring-blue-500 focus:ring-2" checked="" data-popover-target="capital-popover" wfd-id="id7">
+                                                    <label for="capitalLetters" class="ml-2 text-sm font-medium text-white-900">
+                                                        Uppercase Letters</label>
+                                                    <div data-popover="" id="capital-popover" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-[#09090d] rounded-lg shadow-sm opacity-0" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 10px);" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="bottom">
+            <div class="px-3 py-2 bg-[#09090d]/70 rounded-t-lg">
+                <h3 class="font-semibold text-white">Capital Letters</h3>
+            </div>
+            <div class="px-3 py-2">
+                <p>Include capital letters in your license.</p>
+            </div>
+            <div data-popper-arrow="" style="position: absolute; left: 0px; transform: translate(0px, 0px);"></div>
+        </div>                                                </div>
+                                            </div>
+
+
+                                            <div class="relative mb-4 pt-2">
+                                                <select id="level" name="level" class="bg-[#0f0f17] border border-gray-700 text-white-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" data-popover-target="level-popover">
+                                                    
+                                                    <option value="1" selected="">
+                                                        1 (default)</option>
+                                                                                                    </select>
+
+                                                <div data-popover="" id="level-popover" role="tooltip" class="absolute z-10 inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-[#09090d] rounded-lg shadow-sm opacity-0 invisible" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(63px, -52px);" data-popper-placement="top">
+            <div class="px-3 py-2 bg-[#09090d]/70 rounded-t-lg">
+                <h3 class="font-semibold text-white">License Level</h3>
+            </div>
+            <div class="px-3 py-2">
+                <p>The level/subscription you would like to assign to your license(s).</p>
+            </div>
+            <div data-popper-arrow="" style="position: absolute; left: 0px; transform: translate(124px, 0px);"></div>
+        </div>                                            </div>
+
+                                            <div class="relative mb-4">
+                                                <input type="text" maxlength="69" id="note" name="note" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-white bg-transparent rounded-lg border-1 border-gray-700 appearance-none focus:ring-0  peer" placeholder=" " autocomplete="on" value="" data-popover-target="note-popover" wfd-id="id8">
+                                                <label for="note" class="absolute text-sm text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#0f0f17] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">License
+                                                    Note</label>
+
+                                                <div data-popover="" id="note-popover" role="tooltip" class="absolute z-10 inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-[#09090d] rounded-lg shadow-sm opacity-0 invisible" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(63px, -58px);" data-popper-placement="top">
+            <div class="px-3 py-2 bg-[#09090d]/70 rounded-t-lg">
+                <h3 class="font-semibold text-white">License Note</h3>
+            </div>
+            <div class="px-3 py-2">
+                <p>A unique message for a license.</p>
+            </div>
+            <div data-popper-arrow="" style="position: absolute; left: 0px; transform: translate(124px, 0px);"></div>
+        </div>                                            </div>
+
+                                            <div class="relative mb-4">
+                                                <select id="expiry" name="expiry" class="bg-[#0f0f17] border border-gray-700 text-white-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" data-popover-target="expiry-popover">
+                                                    <option value="1" selected="">
+                                                        Seconds
+                                                    </option>
+                                                    <option value="60">
+                                                        Minutes
+                                                    </option>
+                                                    <option value="3600">
+                                                        Hours
+                                                    </option>
+                                                    <option value="86400">
+                                                        Days
+                                                    </option>
+                                                    <option value="604800">
+                                                        Weeks
+                                                    </option>
+                                                    <option value="2629743">
+                                                        Months
+                                                    </option>
+                                                    <option value="31556926">
+                                                        Years
+                                                    </option>
+                                                    <option value="315569260">
+                                                        Lifetime
+                                                    </option>
+                                                </select>
+                                                <label for="expiry" class="absolute text-sm text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#0f0f17] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">License
+                                                    Expiry Unit</label>
+
+                                                <div data-popover="" id="expiry-popover" role="tooltip" class="absolute z-10 inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-[#09090d] rounded-lg shadow-sm opacity-0 invisible" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(63px, -52px);" data-popper-reference-hidden="" data-popper-placement="top">
+            <div class="px-3 py-2 bg-[#09090d]/70 rounded-t-lg">
+                <h3 class="font-semibold text-white">License Expiry (unit)</h3>
+            </div>
+            <div class="px-3 py-2">
+                <p>The unit the license will expire in.</p>
+            </div>
+            <div data-popper-arrow="" style="position: absolute; left: 0px; transform: translate(124px, 0px);"></div>
+        </div>                                            </div>
+
+                                            <div class="relative mb-4">
+                                                <input type="text" inputmode="numeric" maxlength="4" id="duration" name="duration" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-white bg-transparent rounded-lg border-1 border-gray-700 appearance-none focus:ring-0  peer" placeholder=" " autocomplete="on" pattern="\d*" value="" required="" data-popover-target="duration-popover" wfd-id="id9">
+                                                <label for="duration" class="absolute text-sm text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#0f0f17] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">License
+                                                    Duration</label>
+
+                                                <div data-popover="" id="duration-popover" role="tooltip" class="absolute z-10 inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-[#09090d] rounded-lg shadow-sm opacity-0 invisible" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(63px, -58px);" data-popper-reference-hidden="" data-popper-placement="top">
+            <div class="px-3 py-2 bg-[#09090d]/70 rounded-t-lg">
+                <h3 class="font-semibold text-white">License Expiry (duration)</h3>
+            </div>
+            <div class="px-3 py-2">
+                <p>The duration the license will expire in. (Unit * Duration = Expiry)</p>
+            </div>
+            <div data-popper-arrow="" style="position: absolute; left: 0px; transform: translate(124px, 0px);"></div>
+        </div>                                            </div>
+                                        </div>
+                                        <button type="submit" name="genkeys" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Generate
+                                            Keys</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Create Key Modal -->
+
+                    <!-- Add Time To Key Modal -->
+                    <div id="add-time-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full justify-center items-center">
+                        <div class="relative w-full max-w-md max-h-full">
+                            <!-- Modal content -->
+                            <div class="relative bg-[#0f0f17] rounded-lg border border-[#1d4ed8] shadow">
+                                <div class="px-6 py-6 lg:px-8">
+                                    <h3 class="mb-4 text-xl font-medium text-white-900">Add Time To Unused Licenses</h3>
+                                    <hr class="h-px mb-4 mt-4 bg-gray-700 border-0">
+                                    <form class="space-y-6" method="POST">
+                                        <div>
+
+                                            <div class="relative mb-4  ">
+                                                <select id="expiry" name="expiry" class="bg-[#0f0f17] border border-gray-700 text-white-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                                    <option value="1" selected="">Seconds</option>
+                                                    <option value="60">Minutes</option>
+                                                    <option value="3600">Hours</option>
+                                                    <option value="86400">Days</option>
+                                                    <option value="604800">Weeks</option>
+                                                    <option value="2629743">Months</option>
+                                                    <option value="31556926">Years</option>
+                                                    <option value="315569260">Lifetime</option>
+                                                </select>
+                                                <label for="expiry" class="absolute text-sm text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#0f0f17] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Unit
+                                                    of Time To Add</label>
+                                            </div>
+
+                                            <div class="relative mb-4">
+                                                <input type="text" inputmode="numeric" min="1" id="time" name="time" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-white bg-transparent rounded-lg border-1 border-gray-700 appearance-none focus:ring-0  peer" autocomplete="on" placeholder="" required="" wfd-id="id10" value="">
+                                                <label for="time" class="absolute text-sm text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#0f0f17] px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Time
+                                                    To Add</label>
+                                            </div>
+
+                                        </div>
+                                        <button name="addtime" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Add
+                                            Time</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Add Time To Key Modal -->
+
+                    <!-- Import Keys Modal -->
+                    <div id="import-key-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                        <div class="relative w-full max-w-md max-h-full">
+                            <!-- Modal content -->
+                            <div class="relative bg-[#0f0f17] rounded-lg border border-[#1d4ed8] shadow">
+                                <div class="px-6 py-6 lg:px-8">
+                                    <h3 class="mb-4 text-xl font-medium text-white-900">Import Licenses .json</h3>
+                                    <hr class="h-px mb-4 mt-4 bg-gray-700 border-0">
+                                    <form class="space-y-6" method="POST" enctype="multipart/form-data">
+                                        <div class="relative">
+                                            <input class="block w-full text-sm text-gray-400 border border-gray-700 rounded-lg cursor-pointer focus:outline-none" id="file_input" name="file_input" type="file" wfd-id="id11">
+                                        </div>
+                                        <button type="submit" name="importkeysFile" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Import
+                                            Licenses</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Import Keys Modal -->
+
+                    <!-- Delete All Keys Modal -->
+                    <div id="delete-all-keys-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full justify-center items-center">
+                        <div class="relative w-full max-w-md max-h-full">
+                            <div class="relative bg-[#0f0f17] border border-red-700 rounded-lg shadow">
+                                <div class="p-6 text-center">
+                                    <div class="flex items-center p-4 mb-4 text-sm text-white border border-yellow-500 rounded-lg bg-[#0f0f17]" role="alert">
+                                        <span class="sr-only">Info</span>
+                                        <div>
+                                            <span class="font-medium">Notice!</span> This will not delete users (prevent
+                                            them from logging in). Go to https://keyauth.cc/app/?page=users for that.
+                                            
+                                        </div>
+                                    </div>
+                                    <h3 class="mb-5 text-lg font-normal text-gray-200">Are you sure you want to delete
+                                        all of your keys? This can not be undone.</h3>
+                                    <form method="POST">
+                                        <button data-modal-hide="delete-all-keys-modal" name="delkeys" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                                            Yes, I'm sure
+                                        </button>
+                                        <button data-modal-hide="delete-all-keys-modal" type="button" class="inline-flex text-white bg-gray-700 hover:opacity-60 focus:ring-0 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 transition duration-200">No,
+                                            cancel</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Delete All Keys Modal -->
+
+                    <!-- Delete All Used Keys Modal -->
+                    <div id="delete-all-used-keys-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full justify-center items-center">
+                        <div class="relative w-full max-w-md max-h-full">
+                            <div class="relative bg-[#0f0f17] border border-red-700 rounded-lg shadow">
+                                <div class="p-6 text-center">
+                                    <div class="flex items-center p-4 mb-4 text-sm text-white border border-yellow-500 rounded-lg bg-[#0f0f17]" role="alert">
+                                        <span class="sr-only">Info</span>
+                                        <div>
+                                            <span class="font-medium">Notice!</span> This will not delete users (prevent
+                                            them from logging in). Go to https://keyauth.cc/app/?page=users for that.
+                                            
+                                        </div>
+                                    </div>
+                                    <h3 class="mb-5 text-lg font-normal text-gray-200">Are you sure you want to delete
+                                        all of your used keys? This can not be undone.</h3>
+                                    <form method="POST">
+                                        <button data-modal-hide="delete-all-used-keys-modal" name="deleteallused" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                                            Yes, I'm sure
+                                        </button>
+                                        <button data-modal-hide="delete-all-used-keys-modal" type="button" class="inline-flex text-white bg-gray-700 hover:opacity-60 focus:ring-0 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 transition duration-200">No,
+                                            cancel</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Delete All Used Keys Modal -->
+
+                    <!-- Delete All Unused Keys Modal -->
+                    <div id="delete-all-unused-keys-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full justify-center items-center">
+                        <div class="relative w-full max-w-md max-h-full">
+                            <div class="relative bg-[#0f0f17] border border-red-700 rounded-lg shadow">
+                                <div class="p-6 text-center">
+                                    <div class="flex items-center p-4 mb-4 text-sm text-white border border-yellow-500 rounded-lg bg-[#0f0f17]" role="alert">
+                                        <span class="sr-only">Info</span>
+                                        <div>
+                                            <span class="font-medium">Notice!</span> This will not delete users (prevent
+                                            them from logging in). Go to https://keyauth.cc/app/?page=users for that.
+                                            
+                                        </div>
+                                    </div>
+                                    <h3 class="mb-5 text-lg font-normal text-gray-200">Are you sure you want to delete
+                                        all of your unused keys? This can not be undone.</h3>
+                                    <form method="POST">
+                                        <button data-modal-hide="delete-all-unused-keys-modal" name="deleteallunused" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                                            Yes, I'm sure
+                                        </button>
+                                        <button data-modal-hide="delete-all-unused-keys-modal" type="button" class="inline-flex text-white bg-gray-700 hover:opacity-60 focus:ring-0 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 transition duration-200">No,
+                                            cancel</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Delete All Unused Keys Modal -->
+
+                    <!-- Delete Key Modal -->
+                    <div id="del-key" tabindex="-1" class="modal fixed inset-0 flex items-center justify-center z-50 hidden">
+                        <div class="relative w-full max-w-md max-h-full">
+                            <div class="relative bg-[#0f0f17] border border-red-700 rounded-lg shadow">
+                                <div class="p-6 text-center">
+                                    <div class="flex items-center p-4 mb-4 text-sm text-white border border-yellow-500 rounded-lg bg-[#0f0f17]" role="alert">
+                                        <span class="sr-only">Info</span>
+                                        <div>
+                                            <span class="font-medium">Notice!</span> This will not delete the user
+                                            (prevent them from logging in) unless you check Delete User Too
+                                            
+                                        </div>
+                                    </div>
+                                    <h3 class="mb-5 text-lg font-normal text-gray-200">Are you sure you want to delete
+                                        this key? This can not be undone.</h3>
+                                    <form method="POST">
+                                        <div class="flex items-center mb-4">
+                                            <input id="delUserToo" name="delUserToo" type="checkbox" class="w-4 h-4 text-blue-600 bg-[#0f0f17] border-gray-300 rounded focus:ring-blue-500 focus:ring-2" checked="" wfd-id="id12">
+                                            <label for="delUserToo" class="ml-2 text-sm font-medium text-white-900">Delete user too</label>
+                                        </div>
+
+                                        <button name="deletekey" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2 delkey">
+                                            Yes, I'm sure
+                                        </button>
+                                        <button type="button" class="inline-flex text-white bg-gray-700 hover:opacity-60 focus:ring-0 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 transition duration-200">No,
+                                            cancel</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Delete Key Modal -->
+
+                    <!-- Ban License Modal Actions-->
+                    <div id="ban-key-modal" tabindex="-1" class="modal fixed inset-0 flex items-center justify-center z-50 hidden">
+                        <div class="relative w-full max-w-md max-h-full">
+                            <div class="relative bg-[#0f0f17] border border-red-700 rounded-lg shadow">
+                                <div class="p-6 text-center">
+                                    <div class="flex items-center p-4 mb-4 text-sm text-red-800 border border-red-700 rounded-lg bg-[#0f0f17]" role="alert">
+                                        <span class="sr-only">Info</span>
+                                        <div>
+                                            <span class="font-medium text-red-400">Notice! This will not ban the user
+                                                (prevent them from logging in) unless you check Ban User Too</span>
+                                        </div>
+                                    </div>
+                                    <h3 class="mb-5 text-lg font-normal text-gray-200">Are you sure you want to ban this
+                                        license?
+                                        <form method="POST">
+                                            <div class="relative mb-4 mt-2">
+                                                <input type="text" id="reason" name="reason" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-white bg-transparent rounded-lg border-1 border-gray-700 appearance-none focus:ring-0 peer focus:border-red-700" placeholder=" " autocomplete="on" wfd-id="id13" value="">
+                                                <label for="reason" class="absolute text-sm text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-[#0f0f17] px-2 peer-focus:px-2 peer-focus:text-red-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">
+                                                    Reason</label>
+                                            </div>
+                                            <div class="flex items-center mb-4 pt-4">
+                                                <input id="banUserToo" name="banUserToo" type="checkbox" class="w-4 h-4 text-blue-600 bg-[#0f0f17] border-gray-300 rounded focus:ring-blue-500 focus:ring-2" checked="" wfd-id="id14">
+                                                <label for="banUserToo" class="ml-2 text-sm font-medium text-white-900">Ban User
+                                                    Too?</label>
+                                            </div>
+                                            <button name="bankey" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2 bankey">
+                                                Yes, I'm sure
+                                            </button>
+                                            <button type="button" class="inline-flex text-white bg-gray-700 hover:opacity-60 focus:ring-0 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 transition duration-200">No,
+                                                cancel</button>
+                                        </form>
+                                </h3></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Ban License Modal Actions-->
+
+                    <!-- START TABLE -->
+                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg pt-5">
+                        <div id="kt_datatable_licenses_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer"><div class="row"><div class="col-sm-6 d-flex align-items-center justify-conten-start"><div class="dataTables_length" id="kt_datatable_licenses_length"><label>Show <select name="kt_datatable_licenses_length" aria-controls="kt_datatable_licenses" class="form-select form-select-sm form-select-solid"><option value="10" selected="">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select></label></div></div><div class="col-sm-6 d-flex align-items-center justify-content-end"><div id="kt_datatable_licenses_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm form-control-solid" placeholder="" aria-controls="kt_datatable_licenses" wfd-id="id15" value=""></label></div></div></div><div class="table-responsive"><table id="kt_datatable_licenses" class="w-full text-sm text-left text-white dataTable no-footer" aria-describedby="kt_datatable_licenses_info" style="width: 1572px;">
+                            <thead>
+                                <tr class="border-2 border-gray-200 text-blue-700 px-7"><th scope="col" class="px-6 py-3 sorting" tabindex="0" aria-controls="kt_datatable_licenses" rowspan="1" colspan="1" style="width: 97px;" aria-label="Select: activate to sort column ascending">Select</th><th scope="col" class="px-6 py-3 sorting sorting_desc" tabindex="0" aria-controls="kt_datatable_licenses" rowspan="1" colspan="1" style="width: 70px;" aria-sort="descending" aria-label="Key: activate to sort column ascending">Key</th><th scope="col" class="px-6 py-3 sorting" tabindex="0" aria-controls="kt_datatable_licenses" rowspan="1" colspan="1" style="width: 187px;" aria-label="Creation Date: activate to sort column ascending">Creation Date</th><th scope="col" class="px-6 py-3 sorting" tabindex="0" aria-controls="kt_datatable_licenses" rowspan="1" colspan="1" style="width: 184px;" aria-label="Generated By: activate to sort column ascending">Generated By</th><th scope="col" class="px-6 py-3 sorting" tabindex="0" aria-controls="kt_datatable_licenses" rowspan="1" colspan="1" style="width: 130px;" aria-label="Duration: activate to sort column ascending">Duration</th><th scope="col" class="px-6 py-3 sorting" tabindex="0" aria-controls="kt_datatable_licenses" rowspan="1" colspan="1" style="width: 85px;" aria-label="Note: activate to sort column ascending">Note</th><th scope="col" class="px-6 py-3 sorting" tabindex="0" aria-controls="kt_datatable_licenses" rowspan="1" colspan="1" style="width: 125px;" aria-label="Used On: activate to sort column ascending">Used On</th><th scope="col" class="px-6 py-3 sorting" tabindex="0" aria-controls="kt_datatable_licenses" rowspan="1" colspan="1" style="width: 121px;" aria-label="Used By: activate to sort column ascending">Used By</th><th scope="col" class="px-6 py-3 sorting" tabindex="0" aria-controls="kt_datatable_licenses" rowspan="1" colspan="1" style="width: 99px;" aria-label="Status: activate to sort column ascending">Status</th><th scope="col" class="px-6 py-3 sorting" tabindex="0" aria-controls="kt_datatable_licenses" rowspan="1" colspan="1" style="width: 114px;" aria-label="Actions: activate to sort column ascending">Actions</th></tr>
+                            </thead><tbody><tr class="odd"><td valign="top" colspan="10" class="dataTables_empty">No data available in table</td></tr></tbody>
+                        </table><div id="kt_datatable_licenses_processing" class="dataTables_processing" style="display: none;">Processing...</div></div><div class="row"><div class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start"><div class="dataTables_info" id="kt_datatable_licenses_info" role="status" aria-live="polite" style="color: rgb(107, 114, 128);">Showing no records</div></div><div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end"><div class="dataTables_paginate paging_simple_numbers" id="kt_datatable_licenses_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="kt_datatable_licenses_previous"><a href="#" aria-controls="kt_datatable_licenses" data-dt-idx="0" tabindex="0" class="page-link"><i class="previous"></i></a></li><li class="paginate_button page-item next disabled" id="kt_datatable_licenses_next"><a href="#" aria-controls="kt_datatable_licenses" data-dt-idx="1" tabindex="0" class="page-link"><i class="next"></i></a></li></ul></div></div></div></div>
+                    </div>
+                    <p class="text-xs text-red-600">Dropdown actions in <b>RED</b> do not show a confirmation!<a class="text-blue-700"> Dropdown actions in <b>BLUE</b> will show a confirmation!</a></p>
+
+                    
+                    <!-- END TABLE -->
+
+                </div>
+
+                        </div></div></div></div></main>
+
+        <footer class="bg-[#0f0f17] rounded-lg shadow m-4">
+    <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+      <span class="text-sm text-white-500 sm:text-center">Copyright © 2020 - 2025  KeyAuth LLC. All Rights Reserved.
+    </span>
+    <ul class="flex flex-wrap items-center mt-3 text-sm font-medium sm:mt-0">
+        <li>
+            <a href="https://github.com/KeyAuth/KeyAuth-Source-Code" target="_blank" class="mr-4 hover:underline md:mr-6 ">Source Code</a>
+        </li>
+        <li>
+            <a href="https://keyauth.cc/terms" target="_blank" class="mr-4 hover:underline md:mr-6">Terms and Conditions</a>
+        </li>
+        <li>
+            <a href="https://keyauth.cc/privacy" target="_blank" class="mr-4 hover:underline md:mr-6">Privacy</a>
+        </li>
+        <li>
+            <a href="https://chatting.page/keyauth" target="_blank" class="hover:underline">Help</a>
+        </li>
+    </ul>
+    </div>
+</footer>
+    </div>
+</div>
+
+    
+    
+
+    
+    
+
+    
+
+    <link href="lineicons.css" rel="stylesheet">
+
+    
+    
+
+    
+    
+
+    
+
+    
+
+
+
+
+     <!--Checkbox feature-->
+     
+
+    
+
+
+
+<svg id="SvgjsSvg1001" width="2" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev" style="overflow: hidden; top: -100%; left: -100%; position: absolute; opacity: 0;"><defs id="SvgjsDefs1002"></defs><polyline id="SvgjsPolyline1003" points="0,0"></polyline><path id="SvgjsPath1004" d="M0 0 "></path></svg><div id="veepn-breach-alert" data-scrapbook-shadowdom="<style>.breach-popup{font-family:FigtreeVF,sans-serif;position:fixed;z-index:2147483638;text-rendering:optimizelegibility;top:0;left:0;right:0;pointer-events:none;padding-inline:16px;height:0;overflow:visible;color:#222e3a}.breach-popup *{box-sizing:border-box}.breach-popup__inner{background-color:#de4558;width:100%;border-radius:16px;margin-inline:auto;pointer-events:all;position:relative;transition:transform .25s ease-in-out,max-width .25s ease-in-out;transform:translateY(16px);max-height:calc(100svh - 80px);display:flex;flex-direction:column}.breach-popup__header{min-height:32px;display:flex;align-items:center;justify-content:space-between;column-gap:16px;padding:4px;cursor:pointer}.breach-popup__close{cursor:pointer;background-color:transparent;border-style:none;outline:none;display:flex;align-items:center;justify-content:center;width:24px;height:24px;flex-shrink:0;opacity:.5}.breach-popup__wrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows .25s ease-in-out;overflow:hidden}.breach-popup__content{overflow:hidden;opacity:0;transform:translateY(-10px)}.breach-popup--minimize .breach-popup__inner{max-width:485px;transform:translateY(-100%)}.breach-popup--collapse .breach-popup__inner{max-width:485px}.breach-popup--expand .breach-popup__inner{max-width:1120px}.breach-popup--expand .breach-popup__wrap{grid-template-rows:1fr}.breach-popup--expand .breach-popup__content{opacity:1;transform:translateY(0);transition:transform .25s ease-in-out,opacity .25s ease-in-out;transition-delay:.15s}.breach-popup--expand .breach-popup__header{cursor:default}.breach-info{padding:2px;height:100%}.breach-info__inner{padding:22px 22px 0;background-color:#fff;border-bottom-left-radius:15px;border-bottom-right-radius:15px;height:100%;overflow:auto}.breach-info__alert{font-size:24px;line-height:32px;font-weight:700;margin:0}.breach-info__list{margin-top:24px;display:flex;flex-wrap:wrap;gap:24px}@media only screen and (width >= 992px){.breach-info__list{flex-wrap:nowrap}}.breach-info__item{width:100%}.breach-info__item:nth-child(2){max-width:320px}.breach-info__item:nth-child(3){max-width:200px}.breach-info__title{font-size:18px;font-weight:700;line-height:32px;letter-spacing:-.1px;color:#de4558;margin-top:0;margin-bottom:4px}.breach-info__description{font-size:16px;line-height:28px;letter-spacing:-.1px}.breach-info__description ul{margin:0}.breach-info__actions{display:flex;justify-content:center;padding-top:32px;padding-bottom:22px;background-color:#fff;position:sticky;bottom:0}.breach-info__btn{cursor:pointer;border-style:none;outline:none;display:inline-flex;align-items:center;height:48px;padding-inline:20px;border-radius:12px;text-align:center;font-size:16px;font-weight:700;line-height:28px;letter-spacing:-.1px;color:#fff;background-color:#ff6400}.button-expand{position:absolute;bottom:0;left:50%;transform:translate(-50%,100%);z-index:1}.button-expand__pointer{cursor:pointer}.button-expand__alert{pointer-events:none;transition:opacity .25s ease-in-out}.button-expand__arrow{pointer-events:none;transition:transform .25s ease-in-out,opacity .25s ease-in-out;transform-origin:center}.button-expand--minimize .button-expand__arrow,.button-expand--collapse .button-expand__alert,.button-expand--expand .button-expand__alert{opacity:0}.button-expand--expand .button-expand__arrow{transform:rotate(180deg)}.header-collapse{display:flex;align-items:center;flex-wrap:wrap;column-gap:4px;padding-left:8px;font-size:14px;line-height:20px;letter-spacing:-.1px;color:#fff}.header-expand{display:flex;align-items:center;flex-wrap:wrap;column-gap:4px;padding-left:20px;font-size:14px;font-weight:500;line-height:20px;letter-spacing:-.1px;color:#fff}</style>"></div><style>@font-face{font-family:FigtreeVF;src:url("") format("woff2 supports variations"),url("") format("woff2-variations");font-weight:100 1000;font-display:swap}</style><div id="veepn-guard-alert" data-scrapbook-shadowdom="<style>html{box-sizing:border-box;text-size-adjust:100%;word-break:normal;-moz-tab-size:4;tab-size:4}*,:before,:after{background-repeat:no-repeat;box-sizing:border-box}:before,:after{text-decoration:inherit;vertical-align:inherit}*{padding:0;margin:0}hr{overflow:visible;height:0;color:inherit;border:0;border-top:1px solid}details,main{display:block}summary{display:list-item}small{font-size:80%}[hidden]{display:none}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}a{background-color:transparent}a:active,a:hover{outline-width:0}code,kbd,pre,samp{font-family:monospace}pre{font-size:1em}b,strong{font-weight:bolder}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{border-color:inherit;text-indent:0}iframe{border-style:none}input{border-radius:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;-moz-appearance:textfield;appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none;-moz-appearance:none;appearance:none}textarea{overflow:auto;resize:vertical}button,input,optgroup,select,textarea{font:inherit;color:inherit}optgroup{font-weight:700}button{overflow:visible}button,select{text-transform:none}button,[type=button],[type=reset],[type=submit],[role=button]{cursor:pointer}button::-moz-focus-inner,[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{border-style:none;padding:0}button,html [type=button],[type=reset],[type=submit]{-webkit-appearance:button;-moz-appearance:button;appearance:button}button,input,select,textarea{background-color:transparent;border-style:none}button:-moz-focusring,[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{outline:1px dotted ButtonText}select{-webkit-appearance:none;-moz-appearance:none;appearance:none}a:focus,button:focus,input:focus,select:focus,textarea:focus{outline-width:0}select::-ms-expand{display:none}select::-ms-value{color:currentcolor}legend{border:0;color:inherit;display:table;white-space:normal;max-width:100%}::-webkit-file-upload-button{-webkit-appearance:button;-moz-appearance:button;appearance:button;color:inherit;font:inherit}[disabled]{cursor:default}img{border-style:none}progress{vertical-align:baseline}[aria-busy=true]{cursor:progress}[aria-controls]{cursor:pointer}[aria-disabled=true]{cursor:default}ul,ol{list-style-type:none}figure{margin:0}.guard-popup{font-family:FigtreeVF,sans-serif;position:fixed;z-index:2147483638;top:8px;left:24px;overflow:visible;color:#222e3a;background-color:#fff;max-width:416px;width:calc(100% - 48px);border-radius:16px;box-shadow:0 4px 20px #00000040;padding:24px}.guard-popup__header{display:flex;justify-content:space-between;align-items:center;column-gap:16px;margin-bottom:24px}.guard-popup__close{display:flex;align-items:center;justify-content:center;width:24px;height:24px;opacity:.7}.guard-popup__img{line-height:0;margin-bottom:24px}.guard-popup__img img{width:100%;aspect-ratio:368/142;object-fit:cover;border-radius:12px;overflow:hidden}.guard-popup__title{font-size:24px;line-height:32px;margin-bottom:8px}.guard-popup__description{font-size:20px;line-height:28px;font-weight:500;color:#4a5764;margin-bottom:28px}.guard-popup__actions{display:flex;justify-content:flex-end;column-gap:16px}.guard-popup__btn{display:flex;align-items:center;justify-content:center;padding:8px 16px;border-radius:5px;font-size:16px;line-height:24px;font-weight:700;cursor:pointer;color:#fff;background:linear-gradient(180deg,#5695fd,#1554ff)}</style>"></div><style>@font-face{font-family:FigtreeVF;src:url("") format("woff2 supports variations"),url("") format("woff2-variations");font-weight:100 1000;font-display:swap}</style><iframe id="tidio-chat-code" title="Tidio Chat code" style="display: none;" src="index_1.html"></iframe><div id="tidio-chat" style="position: fixed; z-index: 999999999 !important;"><iframe title="Tidio Chat" id="tidio-chat-iframe" style="display: block; border: none; position: fixed; top: auto; bottom: 50% !important; right: 0px; width: 60px; height: 350px; transform: translateY(50%) !important; opacity: 1; color-scheme: none; background: none transparent !important; margin: 0px; max-height: 100dvh; max-width: 100vw; transition: none !important; visibility: visible; z-index: 999999999 !important;" src="index_2.html"></iframe></div><div modal-backdrop="" class="bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40"></div><script data-scrapbook-elem="basic-loader">(function () { var k1 = "data-scrapbook-shadowdom", k2 = "data-scrapbook-canvas", k3 = "data-scrapbook-input-indeterminate", k4 = "data-scrapbook-input-checked", k5 = "data-scrapbook-option-selected", k6 = "data-scrapbook-input-value", k7 = "data-scrapbook-textarea-value", k8 = "data-scrapbook-adoptedstylesheets", k9 = /^data-scrapbook-adoptedstylesheet-(\d+)$/, k10 = "data-scrapbook-shadowdom-mode", k11 = "data-scrapbook-shadowdom-clonable", k12 = "data-scrapbook-shadowdom-delegates-focus", k13 = "data-scrapbook-shadowdom-serializable", k14 = "data-scrapbook-shadowdom-slot-assignment", k15 = "data-scrapbook-slot-assigned", k16 = "data-scrapbook-slot-index", k17 = /^scrapbook-slot-index=(\d+)$/; k18 = '/scrapbook-slot-index'; d = document, r = d.documentElement, $s = !!r.attachShadow, $as = !!d.adoptedStyleSheets, $c = !!window.HTMLCanvasElement, $sa = !!d.createElement('slot').assign, sle = [], sls = [], slt = function (r) { if ($sa) { var E = r.childNodes, i, e, s, m; for (i = 0; i < E.length; i++) { e = E[i]; if (e.nodeType === 8) { s = e.nodeValue; if (m = s.match(k17)) { s = e.nextSibling; if (s.nodeType === 3) { sls[m[1]] = s; } r.removeChild(e); i--; } else if (s === k18) { r.removeChild(e); i--; } } } } }, sl = function () { var i = sle.length, j, d, e; while (i--) { d = sle[i]; e = d.elem; d = d.value.split(','); j = d.length; while (j--) { d[j] = sls[parseInt(d[j], 10)]; } try { e.assign.apply(e, d); } catch (ex) { console.error(ex); } } }, asl = (function (r) { var l = [], E, i, e, m, c, j; if ($as) { E = r.attributes; i = E.length; while (i--) { e = E[i]; if (!(m = e.nodeName.match(k9))) { continue; } c = l[m[1]] = new CSSStyleSheet(); r.removeAttribute(m[0]); m = e.nodeValue.split('\n\n'); j = m.length; while (j--) { try { m[j] && c.insertRule(m[j]); } catch (ex) { console.error(ex); } } } } return l; })(r), as = function (d, e) { var l, i, I; if ($as && (l = e.getAttribute(k8)) !== null) { l = l.split(','); for (i = 0, I = l.length; i < I; i++) { d.adoptedStyleSheets.push(asl[l[i]]); } e.removeAttribute(k8); } }, fn = function (r) { var E = r.querySelectorAll ? r.querySelectorAll("*") : r.getElementsByTagName("*"), i = E.length, e, d, s, m; while (i--) { e = E[i]; s = e.shadowRoot; if ($s && (d = e.getAttribute(k1))) { if (!s) { try { s = e.attachShadow({ mode: (m = e.getAttribute(k10)) !== null ? m : 'open', clonable: e.hasAttribute(k11), delegatesFocus: e.hasAttribute(k12), serializable: e.hasAttribute(k13), slotAssignment: (m = e.getAttribute(k14)) !== null ? m : void(0), }); s.innerHTML = d; } catch (ex) { console.error(ex); } } e.removeAttribute(k1); e.removeAttribute(k10); e.removeAttribute(k11); e.removeAttribute(k12); e.removeAttribute(k13); e.removeAttribute(k14); } if ($c && (d = e.getAttribute(k2)) !== null) { (function () { var c = e, g = new Image(); g.onload = function () { c.getContext('2d').drawImage(g, 0, 0); }; g.src = d; })(); e.removeAttribute(k2); } if ((d = e.getAttribute(k3)) !== null) { e.indeterminate = true; e.removeAttribute(k3); } if ((d = e.getAttribute(k4)) !== null) { e.checked = d === 'true'; e.removeAttribute(k4); } if ((d = e.getAttribute(k5)) !== null) { e.selected = d === 'true'; e.removeAttribute(k5); } if ((d = e.getAttribute(k6)) !== null) { e.value = d; e.removeAttribute(k6); } if ((d = e.getAttribute(k7)) !== null) { e.value = d; e.removeAttribute(k7); } if ($sa && (d = e.getAttribute(k15)) !== null) { sle.push({elem: e, value: d}); e.removeAttribute(k15); } if ($sa && (d = e.getAttribute(k16)) !== null) { sls[d] = e; e.removeAttribute(k16); } if (s) { slt(e); as(s, e); fn(s); } } }; as(d, r); fn(d); sl(); })()</script></body></html>
